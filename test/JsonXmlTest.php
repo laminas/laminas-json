@@ -1,21 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json;
+namespace LaminasTest\Json;
 
-use Zend\Json;
+use Laminas\Json;
 
 error_reporting( E_ALL | E_STRICT ); // now required for each test suite
 
 /**
- * Zend_JSON
+ * Laminas_JSON
  */
 
 /**
@@ -23,10 +21,10 @@ error_reporting( E_ALL | E_STRICT ); // now required for each test suite
  */
 
 /**
- * @category   Zend
- * @package    Zend_JSON
+ * @category   Laminas
+ * @package    Laminas_JSON
  * @subpackage UnitTests
- * @group      Zend_JSON
+ * @group      Laminas_JSON
  */
 class JsonXmlTest extends \PHPUnit_Framework_TestCase
 {
@@ -407,7 +405,7 @@ EOT;
     </platform>
 
     <framework>
-        <name>Zend</name>
+        <name>Laminas</name>
     </framework>
 
     <language>
@@ -419,7 +417,7 @@ EOT;
             <![CDATA[
 /*
 It may not be a syntactically valid PHP code.
-It is used here just to illustrate the CDATA feature of Zend_Xml2JSON
+It is used here just to illustrate the CDATA feature of Laminas_Xml2JSON
 */
 <?php
 include 'example.php';
@@ -453,7 +451,7 @@ EOT;
         // Test if it is not a NULL object.
         $this->assertNotNull($phpArray, "JSON result for XML input 6 is NULL");
         // Test for one of the expected fields in the JSON result.
-        $this->assertContains("Zend", $phpArray['demo']['framework']['name'], "The framework name field converted from XML input 6 is not correct");
+        $this->assertContains("Laminas", $phpArray['demo']['framework']['name'], "The framework name field converted from XML input 6 is not correct");
         // Test for one of the expected CDATA fields in the JSON result.
         $this->assertContains('echo getMovies()->asXML();', $phpArray['demo']['listing']['code'], "The CDATA code converted from XML input 6 is not correct");
     }
@@ -471,9 +469,9 @@ EOT;
         // Set the XML contents that will be tested here.
         $xmlStringContents = <<<EOT
 This is an invalid XML file.
-Use this file to test the xml2json feature in the Zend_JSON class.
+Use this file to test the xml2json feature in the Laminas_JSON class.
 Since it is an invalid XML file, an appropriate exception should be
-thrown by the Zend_Json::fromXml function.
+thrown by the Laminas_Json::fromXml function.
 <?xml version="1.0"?>
 <invalidxml>
         </code>
@@ -489,12 +487,12 @@ EOT;
 
         // Convert XML to JSON now.
         // fromXml function simply takes a String containing XML contents as input.
-        $jsonContents = Zend_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
+        $jsonContents = Laminas_Json::fromXml($xmlStringContents, $ignoreXmlAttributes);
     }
 */
 
     /**
-     *  @group ZF-3257
+     *  @group Laminas-3257
      */
     public function testUsingXML8()
     {
@@ -518,7 +516,7 @@ EOT;
         } catch (Exception $ex) {
             ;
         }
-        $this->assertSame($ex, null, "Zend_JSON::fromXml returned an exception.");
+        $this->assertSame($ex, null, "Laminas_JSON::fromXml returned an exception.");
 
         // Convert the JSON string into a PHP array.
         $phpArray = Json\Json::decode($jsonContents, Json\Json::TYPE_ARRAY);
@@ -531,8 +529,8 @@ EOT;
     }
 
     /**
-     * @group ZF-11385
-     * @expectedException Zend\Json\Exception\RecursionException
+     * @group Laminas-11385
+     * @expectedException Laminas\Json\Exception\RecursionException
      * @dataProvider providerNestingDepthIsHandledProperly
      */
     public function testNestingDepthIsHandledProperlyWhenNestingDepthExceedsMaximum($xmlStringContents)
@@ -542,7 +540,7 @@ EOT;
     }
 
     /**
-     * @group ZF-11385
+     * @group Laminas-11385
      * @dataProvider providerNestingDepthIsHandledProperly
      */
     public function testNestingDepthIsHandledProperlyWhenNestingDepthDoesNotExceedMaximum($xmlStringContents)
@@ -555,7 +553,7 @@ EOT;
     }
 
     /**
-     * XML document provider for ZF-11385 tests
+     * XML document provider for Laminas-11385 tests
      * @return array
      */
     public static function providerNestingDepthIsHandledProperly()
