@@ -1,8 +1,8 @@
-# Zend\\Json\\Server - JSON-RPC server
+# Laminas\\Json\\Server - JSON-RPC server
 
 ## Introduction
 
-`Zend\Json\Server` is a [JSON-RPC](http://groups.google.com/group/json-rpc/) server implementation.
+`Laminas\Json\Server` is a [JSON-RPC](http://groups.google.com/group/json-rpc/) server implementation.
 It supports both the [JSON-RPC version 1 specification](http://json-rpc.org/wiki/specification) as
 well as the [version 2 specification](http://www.jsonrpc.org/specification); additionally, it
 provides a *PHP* implementation of the [Service Mapping Description (SMD)
@@ -18,7 +18,7 @@ situation, you will simply:
 - Attach one or more functions and/or classes/objects to the server object
 - handle() the request
 
-`Zend\Json\Server` utilizes \[Zend\\Server\\Reflection\](zend.server.reflection) to perform
+`Laminas\Json\Server` utilizes \[Laminas\\Server\\Reflection\](laminas.server.reflection) to perform
 reflection on any attached classes or functions, and uses that information to build both the SMD and
 enforce method call signatures. As such, it is imperative that any attached functions and/or class
 methods have full *PHP* docblocks documenting, minimally:
@@ -26,7 +26,7 @@ methods have full *PHP* docblocks documenting, minimally:
 - All parameters and their expected variable types
 - The return value variable type
 
-`Zend\Json\Server` listens for POST requests only at this time; fortunately, most JSON-RPC client
+`Laminas\Json\Server` listens for POST requests only at this time; fortunately, most JSON-RPC client
 implementations in the wild at the time of this writing will only POST requests as it is. This makes
 it simple to utilize the same server end point to both handle requests as well as to deliver the
 service SMD, as is shown in the next example.
@@ -93,13 +93,13 @@ class Calculator
 ```
 
 Note that each method has a docblock with entries indicating each parameter and its type, as well as
-an entry for the return value. This is **absolutely critical** when utilizing `Zend\Json\Server` or
-any other server component in Zend Framework, for that matter.
+an entry for the return value. This is **absolutely critical** when utilizing `Laminas\Json\Server` or
+any other server component in Laminas, for that matter.
 
 Now we'll create a script to handle the requests:
 
 ```php
-$server = new Zend\Json\Server\Server();
+$server = new Laminas\Json\Server\Server();
 
 // Indicate what functionality is available:
 $server->setClass('Calculator');
@@ -113,13 +113,13 @@ autodiscover methods. That can be accomplished by determining the *HTTP* request
 specifying some server metadata:
 
 ```php
-$server = new Zend\Json\Server\Server();
+$server = new Laminas\Json\Server\Server();
 $server->setClass('Calculator');
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) {
     // Indicate the URL endpoint, and the JSON-RPC version used:
     $server->setTarget('/json-rpc.php')
-           ->setEnvelope(Zend\Json\Server\Smd::ENV_JSONRPC_2);
+           ->setEnvelope(Laminas\Json\Server\Smd::ENV_JSONRPC_2);
 
     // Grab the SMD
     $smd = $server->getServiceMap();
@@ -137,12 +137,12 @@ If utilizing the JSON-RPC server with Dojo toolkit, you will also need to set a 
 compatibility flag to ensure that the two interoperate properly:
 
 ```php
-$server = new Zend\Json\Server\Server();
+$server = new Laminas\Json\Server\Server();
 $server->setClass('Calculator');
 
 if ('GET' == $_SERVER['REQUEST_METHOD']) {
     $server->setTarget('/json-rpc.php')
-           ->setEnvelope(Zend\Json\Server\Smd::ENV_JSONRPC_2);
+           ->setEnvelope(Laminas\Json\Server\Smd::ENV_JSONRPC_2);
     $smd = $server->getServiceMap();
 
     // Set Dojo compatibility:
@@ -158,37 +158,37 @@ $server->handle();
 
 ## Advanced Details
 
-While most functionality for `Zend\Json\Server` is spelled out in \[this
-section\](zend.json.server.usage), more advanced functionality is available.
+While most functionality for `Laminas\Json\Server` is spelled out in \[this
+section\](laminas.json.server.usage), more advanced functionality is available.
 
-### Zend\\Json\\Server\\Server
+### Laminas\\Json\\Server\\Server
 
-`Zend\Json\Server\Server` is the core class in the JSON-RPC offering; it handles all requests and
+`Laminas\Json\Server\Server` is the core class in the JSON-RPC offering; it handles all requests and
 returns the response payload. It has the following methods:
 
 - `addFunction($function)`: Specify a userland function to attach to the server.
 - `setClass($class)`: Specify a class or object to attach to the server; all public methods of that
 item will be exposed as JSON-RPC methods.
-- `fault($fault = null, $code = 404, $data = null)`: Create and return a `Zend\Json\Server\Error`
+- `fault($fault = null, $code = 404, $data = null)`: Create and return a `Laminas\Json\Server\Error`
 object.
 - `handle($request = false)`: Handle a JSON-RPC request; optionally, pass a
-`Zend\Json\Server\Request` object to utilize (creates one by default).
+`Laminas\Json\Server\Request` object to utilize (creates one by default).
 - `getFunctions()`: Return a list of all attached methods.
-- `setRequest(Zend\Json\Server\Request $request)`: Specify a request object for the server to
+- `setRequest(Laminas\Json\Server\Request $request)`: Specify a request object for the server to
 utilize.
 - `getRequest()`: Retrieve the request object used by the server.
-- `setResponse(Zend\Json\Server\Response $response)`: Set the response object for the server to
+- `setResponse(Laminas\Json\Server\Response $response)`: Set the response object for the server to
 utilize.
 - `getResponse()`: Retrieve the response object used by the server.
 - `setAutoEmitResponse($flag)`: Indicate whether the server should automatically emit the response
 and all headers; by default, this is `TRUE`.
 - `autoEmitResponse()`: Determine if auto-emission of the response is enabled.
-- `getServiceMap()`: Retrieve the service map description in the form of a `Zend\Json\Server\Smd`
+- `getServiceMap()`: Retrieve the service map description in the form of a `Laminas\Json\Server\Smd`
 object
 
-### Zend\\Json\\Server\\Request
+### Laminas\\Json\\Server\\Request
 
-The JSON-RPC request environment is encapsulated in the `Zend\Json\Server\Request` object. This
+The JSON-RPC request environment is encapsulated in the `Laminas\Json\Server\Request` object. This
 object allows you to set necessary portions of the JSON-RPC request, including the request ID,
 parameters, and JSON-RPC specification version. It has the ability to load itself via *JSON* or a
 set of options, and can render itself as *JSON* via the `toJson()` method.
@@ -214,13 +214,13 @@ either '1.0' or '2.0'.
 - `loadJson($json)`: Load the request object from a *JSON* string.
 - `toJson()`: Render the request as a *JSON* string.
 
-An *HTTP* specific version is available via `Zend\Json\Server\Request\Http`. This class will
+An *HTTP* specific version is available via `Laminas\Json\Server\Request\Http`. This class will
 retrieve the request via `php://input`, and allows access to the raw *JSON* via the `getRawJson()`
 method.
 
-### Zend\\Json\\Server\\Response
+### Laminas\\Json\\Server\\Response
 
-The JSON-RPC response payload is encapsulated in the `Zend\Json\Server\Response` object. This object
+The JSON-RPC response payload is encapsulated in the `Laminas\Json\Server\Response` object. This object
 allows you to set the return value of the request, whether or not the response is an error, the
 request identifier, the JSON-RPC specification version the response conforms to, and optionally the
 service map.
@@ -229,7 +229,7 @@ The response object has the following methods available:
 
 - `setResult($value)`: Set the response result.
 - `getResult()`: Retrieve the response result.
-- `setError(Zend\Json\Server\Error $error)`: Set an error object. If set, this will be used as the
+- `setError(Laminas\Json\Server\Error $error)`: Set an error object. If set, this will be used as the
 response when serializing to *JSON*.
 - `getError()`: Retrieve the error object, if any.
 - `isError()`: Whether or not the response is an error response.
@@ -243,20 +243,20 @@ error object.
 - `setServiceMap($serviceMap)`: Set the service map object for the response.
 - `getServiceMap()`: Retrieve the service map object, if any.
 
-An *HTTP* specific version is available via `Zend\Json\Server\Response\Http`. This class will send
+An *HTTP* specific version is available via `Laminas\Json\Server\Response\Http`. This class will send
 the appropriate *HTTP* headers as well as serialize the response as *JSON*.
 
-### Zend\\Json\\Server\\Error
+### Laminas\\Json\\Server\\Error
 
 JSON-RPC has a special format for reporting error conditions. All errors need to provide, minimally,
 an error message and error code; optionally, they can provide additional data, such as a backtrace.
 
 Error codes are derived from those recommended by [the XML-RPC EPI
-project](http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php). `Zend\Json\Server`
+project](http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php). `Laminas\Json\Server`
 appropriately assigns the code based on the error condition. For application exceptions, the code
 '-32000' is used.
 
-`Zend\Json\Server\Error` exposes the following methods:
+`Laminas\Json\Server\Error` exposes the following methods:
 
 - `setCode($code)`: Set the error code; if the code is not in the accepted XML-RPC error code range,
 -32000 will be assigned.
@@ -269,7 +269,7 @@ appropriately assigns the code based on the error condition. For application exc
 'data'.
 - `toJson()`: Cast the error to a JSON-RPC error representation.
 
-### Zend\\Json\\Server\\Smd
+### Laminas\\Json\\Server\\Smd
 
 SMD stands for Service Mapping Description, a *JSON* schema that defines how a client can interact
 with a particular web service. At the time of this writing, the
@@ -282,22 +282,22 @@ At its most basic, a Service Mapping Description indicates the method of transpo
 map is a list of available methods, which each method documenting the available parameters and their
 types, as well as the expected return value type.
 
-`Zend\Json\Server\Smd` provides an object-oriented way to build service maps. At its most basic, you
+`Laminas\Json\Server\Smd` provides an object-oriented way to build service maps. At its most basic, you
 pass it metadata describing the service using mutators, and specify services (methods and
 functions).
 
-The service descriptions themselves are typically instances of `Zend\Json\Server\Smd\Service`; you
-can also pass all information as an array to the various service mutators in `Zend\Json\Server\Smd`,
+The service descriptions themselves are typically instances of `Laminas\Json\Server\Smd\Service`; you
+can also pass all information as an array to the various service mutators in `Laminas\Json\Server\Smd`,
 and it will instantiate a service for you. The service objects contain information such as the name
 of the service (typically the function or method name), the parameters (names, types, and position),
 and the return value type. Optionally, each service can have its own target and envelope, though
 this functionality is rarely used.
 
-`Zend\Json\Server\Server` actually does all of this behind the scenes for you, by using reflection
+`Laminas\Json\Server\Server` actually does all of this behind the scenes for you, by using reflection
 on the attached classes and functions; you should create your own service maps only if you need to
 provide custom functionality that class and function introspection cannot offer.
 
-Methods available in `Zend\Json\Server\Smd` include:
+Methods available in `Laminas\Json\Server\Smd` include:
 
 - `setOptions(array $options)`: Setup an SMD object from an array of options. All mutators (methods
 beginning with 'set') can be used as keys.
@@ -305,8 +305,8 @@ beginning with 'set') can be used as keys.
 supported.
 - `getTransport()`: Get the current service transport.
 - `setEnvelope($envelopeType)`: Set the request envelope that should be used to access the service.
-Currently, supports the constants `Zend\Json\Server\Smd::ENV_JSONRPC_1` and
-`Zend\Json\Server\Smd::ENV_JSONRPC_2`.
+Currently, supports the constants `Laminas\Json\Server\Smd::ENV_JSONRPC_1` and
+`Laminas\Json\Server\Smd::ENV_JSONRPC_2`.
 - `getEnvelope()`: Get the current request envelope.
 - `setContentType($type)`: Set the content type requests should use (by default, this is
 'application/json').
@@ -323,7 +323,7 @@ toolkit. When `TRUE`, the generated *JSON* SMD will be formatted to comply with 
 Dojo's JSON-RPC client expects.
 - `isDojoCompatible()`: Returns the value of the Dojo compatibility flag (`FALSE`, by default).
 - `addService($service)`: Add a service to the map. May be an array of information to pass to the
-constructor of `Zend\Json\Server\Smd\Service`, or an instance of that class.
+constructor of `Laminas\Json\Server\Smd\Service`, or an instance of that class.
 - `addServices(array $services)`: Add multiple services at once.
 - `setServices(array $services)`: Add multiple services at once, overwriting any previously set
 services.
@@ -334,20 +334,20 @@ services.
 - `toDojoArray()`: Cast the service map to an array compatible with Dojo Toolkit.
 - `toJson()`: Cast the service map to a *JSON* representation.
 
-`Zend\Json\Server\Smd\Service` has the following methods:
+`Laminas\Json\Server\Smd\Service` has the following methods:
 
 - `setOptions(array $options)`: Set object state from an array. Any mutator (methods beginning with
 'set') may be used as a key and set via this method.
 - `setName($name)`: Set the service name (typically, the function or method name).
 - `getName()`: Retrieve the service name.
 - `setTransport($transport)`: Set the service transport (currently, only transports supported by
-`Zend\Json\Server\Smd` are allowed).
+`Laminas\Json\Server\Smd` are allowed).
 - `getTransport()`: Retrieve the current transport.
 - `setTarget($target)`: Set the *URL* endpoint of the service (typically, this will be the same as
 the overall SMD to which the service is attached).
 - `getTarget()`: Get the *URL* endpoint of the service.
 - `setEnvelope($envelopeType)`: Set the service envelope (currently, only envelopes supported by
-`Zend\Json\Server\Smd` are allowed).
+`Laminas\Json\Server\Smd` are allowed).
 - `getEnvelope()`: Retrieve the service envelope type.
 - `addParam($type, array $options = array(), $order = null)`: Add a parameter to the service. By
 default, only the parameter type is necessary. However, you may also specify the order, as well as

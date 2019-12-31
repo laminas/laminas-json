@@ -1,11 +1,11 @@
 {
-    "title": "Zend\\Json",
+    "title": "Laminas\\Json",
     "target": "html/",
     "content": [
-        "book/zend.json.introduction.md",
-        "book/zend.json.basics.md",
-        "book/zend.json.objects.md",
-        "book/zend.json.xml2json.md",
-        "book/zend.json.server.md"
+        "book/laminas.json.introduction.md",
+        "book/laminas.json.basics.md",
+        "book/laminas.json.objects.md",
+        "book/laminas.json.xml2json.md",
+        "book/laminas.json.server.md"
     ]
 }
