@@ -1,42 +1,40 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json\Server;
+namespace LaminasTest\Json\Server;
 
-use Zend\Http\Client as HttpClient;
-use Zend\Http\Client\Adapter\Test as TestAdapter;
-use Zend\Json\Server\Client;
-use Zend\Json\Server\Error;
-use Zend\Json\Server\Request;
-use Zend\Json\Server\Response;
+use Laminas\Http\Client\Adapter\Test as TestAdapter;
+use Laminas\Http\Client as HttpClient;
+use Laminas\Json\Server\Client;
+use Laminas\Json\Server\Error;
+use Laminas\Json\Server\Request;
+use Laminas\Json\Server\Response;
 
 /**
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  * @subpackage UnitTests
- * @group      Zend_XmlRpc
+ * @group      Laminas_XmlRpc
  */
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Zend\Http\Client\Adapter\Test
+     * @var Laminas\Http\Client\Adapter\Test
      */
     protected $httpAdapter;
 
     /**
-     * @var Zend\Http\Client
+     * @var Laminas\Http\Client
      */
     protected $httpClient;
 
     /**
-     * @var Zend\Json\Server\Client
+     * @var Laminas\Json\Server\Client
      */
     protected $jsonClient;
 
@@ -56,7 +54,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $jsonClient = new Client('http://foo');
         $httpClient = $jsonClient->getHttpClient();
-        //$this->assertInstanceOf('Zend\\Http\\Client', $httpClient);
+        //$this->assertInstanceOf('Laminas\\Http\\Client', $httpClient);
         $this->assertSame($httpClient, $jsonClient->getHttpClient());
     }
 
@@ -89,8 +87,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->setServerResponseTo(true);
         $this->jsonClient->call('foo');
 
-        //$this->assertInstanceOf('Zend\\Json\\Server\\Request', $this->jsonClient->getLastRequest());
-        //$this->assertInstanceOf('Zend\\Json\\Server\\Response', $this->jsonClient->getLastResponse());
+        //$this->assertInstanceOf('Laminas\\Json\\Server\\Request', $this->jsonClient->getLastRequest());
+        //$this->assertInstanceOf('Laminas\\Json\\Server\\Response', $this->jsonClient->getLastResponse());
     }
 
     public function testSuccessfulRpcMethodCallWithNoParameters()
@@ -147,7 +145,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $response = $this->makeHttpResponseFrom($body, $status, $message);
         $this->httpAdapter->setResponse($response);
 
-        $this->setExpectedException('Zend\\Json\\Server\\Exception\\HttpException', $message, $status);
+        $this->setExpectedException('Laminas\\Json\\Server\\Exception\\HttpException', $message, $status);
         $this->jsonClient->call('foo');
     }
 
@@ -164,7 +162,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $response = $this->makeHttpResponseFrom($json);
         $this->httpAdapter->setResponse($response);
 
-        $this->setExpectedException('Zend\\Json\\Server\\Exception\\ErrorException', $message, $code);
+        $this->setExpectedException('Laminas\\Json\\Server\\Exception\\ErrorException', $message, $code);
         $this->jsonClient->call('foo');
     }
 
@@ -208,12 +206,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->setServerResponseTo(null);
         $this->assertNull($this->jsonClient->call('method'));
         $this->assertSame(
-            'Zend_Json_Server_Client',
+            'Laminas_Json_Server_Client',
             $this->httpClient->getHeader('User-Agent'),
-            'If no custom UA is set, set Zend_Json_Server_Client'
+            'If no custom UA is set, set Laminas_Json_Server_Client'
         );
 
-        $expectedUserAgent = 'Zend_Json_Server_Client (custom)';
+        $expectedUserAgent = 'Laminas_Json_Server_Client (custom)';
         $this->httpClient->setHeaders(array('User-Agent' => $expectedUserAgent));
 
         $this->setServerResponseTo(null);
@@ -256,7 +254,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function mockHttpClient()
     {
-        $this->mockedHttpClient = $this->getMock('Zend\\Http\\Client');
+        $this->mockedHttpClient = $this->getMock('Laminas\\Http\\Client');
         $this->jsonClient->setHttpClient($this->mockedHttpClient);
     }
 }
