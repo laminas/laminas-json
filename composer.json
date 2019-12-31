@@ -1,32 +1,22 @@
 {
-    "name": "zendframework/zend-json",
+    "name": "laminas/laminas-json",
     "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf2",
+        "laminas",
         "json"
     ],
-    "homepage": "https://github.com/zendframework/zend-json",
-    "autoload": {
-        "psr-4": {
-            "Zend\\Json\\": "src/"
-        }
+    "homepage": "https://laminas.dev",
+    "support": {
+        "docs": "https://docs.laminas.dev/laminas-json/",
+        "issues": "https://github.com/laminas/laminas-json/issues",
+        "source": "https://github.com/laminas/laminas-json",
+        "rss": "https://github.com/laminas/laminas-json/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
-    "require": {
-        "php": ">=5.3.23",
-        "zendframework/zend-stdlib": "self.version"
-    },
-    "require-dev": {
-        "zendframework/zend-http": "self.version",
-        "zendframework/zend-server": "self.version",
-        "fabpot/php-cs-fixer": "1.7.*",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/PHPUnit": "~4.0"
-    },
-    "suggest": {
-        "zendframework/zend-http": "Zend\\Http component",
-        "zendframework/zend-server": "Zend\\Server component",
-        "zendframework/zendxml": "To support Zend\\Json\\Json::fromXml() usage"
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -34,9 +24,34 @@
             "dev-develop": "2.5-dev"
         }
     },
+    "require": {
+        "php": ">=5.3.23",
+        "laminas/laminas-stdlib": "self.version",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer": "1.7.*",
+        "laminas/laminas-http": "self.version",
+        "laminas/laminas-server": "self.version",
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "suggest": {
+        "laminas/laminas-http": "Laminas\\Http component",
+        "laminas/laminas-server": "Laminas\\Server component",
+        "laminas/laminas-xml": "To support Laminas\\Json\\Json::fromXml() usage"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Json\\": "src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Json\\": "test/"
+            "LaminasTest\\Json\\": "test/"
         }
+    },
+    "replace": {
+        "zendframework/zend-json": "self.version"
     }
 }
