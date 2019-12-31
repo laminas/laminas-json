@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server\Smd;
+namespace Laminas\Json\Server\Smd;
 
-use Zend\Json\Server\Exception\InvalidArgumentException;
-use Zend\Json\Server\Smd;
+use Laminas\Json\Server\Exception\InvalidArgumentException;
+use Laminas\Json\Server\Smd;
 
 /**
  * Create Service Mapping Description for a method
@@ -424,7 +423,7 @@ class Service
     {
         $service = array($this->getName() => $this->toArray());
 
-        return \Zend\Json\Json::encode($service);
+        return \Laminas\Json\Json::encode($service);
     }
 
     /**

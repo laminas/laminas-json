@@ -6,10 +6,14 @@
  * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Laminas\Json\Server\Exception;
+namespace LaminasTest\Json\TestAsset;
 
-use Laminas\Json\Exception;
+use Laminas\Stdlib\JsonSerializable;
 
-class RuntimeException extends Exception\RuntimeException implements
-    ExceptionInterface
-{}
+class JsonSerializableLaminasImpl implements JsonSerializable
+{
+    public function jsonSerialize()
+    {
+        return array(__FUNCTION__);
+    }
+}
