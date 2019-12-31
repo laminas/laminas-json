@@ -1,22 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json\Server\Smd;
+namespace LaminasTest\Json\Server\Smd;
 
-use Zend\Json\Server\Smd\Service;
-use Zend\Json\Server;
+use Laminas\Json\Server;
+use Laminas\Json\Server\Smd\Service;
 
 /**
- * Test class for Zend\JSON\Server\Smd\Service
+ * Test class for Laminas\JSON\Server\Smd\Service
  *
- * @group      Zend_JSON
- * @group      Zend_JSON_Server
+ * @group      Laminas_JSON
+ * @group      Laminas_JSON_Server
  */
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,19 +32,19 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorShouldThrowExceptionWhenNoNameSetWhenNullProvided()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'requires a name');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'requires a name');
         $service = new Service(null);
     }
 
     public function testConstructorShouldThrowExceptionWhenNoNameSetWhenArrayProvided()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'requires a name');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'requires a name');
         $service = new Service(null);
     }
 
     public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithInt()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
         $this->service->setName('0ab-?');
     }
 
@@ -57,7 +56,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingNameShouldThrowExceptionWhenContainingInvalidFormatStartingWithRpc()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'Invalid name');
         $this->service->setName('rpc.Foo');
     }
 
@@ -96,13 +95,13 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testSettingTransportThrowsExceptionWhenSetToGet()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid transport');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'Invalid transport');
         $this->service->setTransport('GET');
     }
 
     public function testSettingTransportThrowsExceptionWhenSetToRest()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid transport');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'Invalid transport');
         $this->service->setTransport('REST');
     }
 
@@ -181,7 +180,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidParamTypeShouldThrowException()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid param type');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'Invalid param type');
         $this->service->addParam(new \stdClass);
     }
 
@@ -279,7 +278,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidReturnTypeShouldThrowException()
     {
-        $this->setExpectedException('Zend\Json\Server\Exception\InvalidArgumentException', 'Invalid param type');
+        $this->setExpectedException('Laminas\Json\Server\Exception\InvalidArgumentException', 'Invalid param type');
         $this->service->setReturn(new \stdClass);
     }
 
@@ -294,7 +293,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $this->setupSmdValidationObject();
         $json = $this->service->toJSON();
-        $smd  = \Zend\Json\Json::decode($json, \Zend\Json\Json::TYPE_ARRAY);
+        $smd  = \Laminas\Json\Json::decode($json, \Laminas\Json\Json::TYPE_ARRAY);
 
         $this->assertArrayHasKey('foo', $smd);
         $this->assertInternalType('array', $smd['foo']);
