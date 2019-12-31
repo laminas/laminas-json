@@ -1,21 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server;
+namespace Laminas\Json\Server;
 
-use Zend\Json;
+use Laminas\Json;
 
 /**
  * @todo       Revised method regex to allow NS; however, should SMD be revised to strip PHP NS instead when attaching functions?
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  * @subpackage Server
  */
 class Request
@@ -60,7 +58,7 @@ class Request
      * Set request state
      *
      * @param  array $options
-     * @return \Zend\Json\Server\Request
+     * @return \Laminas\Json\Server\Request
      */
     public function setOptions(array $options)
     {
@@ -81,7 +79,7 @@ class Request
      *
      * @param  mixed $value
      * @param  string $key
-     * @return \Zend\Json\Server\Request
+     * @return \Laminas\Json\Server\Request
      */
     public function addParam($value, $key = null)
     {
@@ -99,7 +97,7 @@ class Request
      * Add many params
      *
      * @param  array $params
-     * @return \Zend\Json\Server\Request
+     * @return \Laminas\Json\Server\Request
      */
     public function addParams(array $params)
     {
@@ -113,7 +111,7 @@ class Request
      * Overwrite params
      *
      * @param  array $params
-     * @return \Zend\Json\Server\Request
+     * @return \Laminas\Json\Server\Request
      */
     public function setParams(array $params)
     {
@@ -150,7 +148,7 @@ class Request
      * Set request method
      *
      * @param  string $name
-     * @return \Zend\Json\Server\Request
+     * @return \Laminas\Json\Server\Request
      */
     public function setMethod($name)
     {
@@ -186,7 +184,7 @@ class Request
      * Set request identifier
      *
      * @param  mixed $name
-     * @return \Zend\Json\Server\Request
+     * @return \Laminas\Json\Server\Request
      */
     public function setId($name)
     {
@@ -208,7 +206,7 @@ class Request
      * Set JSON-RPC version
      *
      * @param  string $version
-     * @return \Zend\Json\Server\Request
+     * @return \Laminas\Json\Server\Request
      */
     public function setVersion($version)
     {
