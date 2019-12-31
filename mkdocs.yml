@@ -8,6 +8,6 @@ nav:
       - "Advanced Usage": advanced.md
     - Migration:
       - "From v2 to v3": migration/v2-to-v3.md
-site_name: zend-json
+site_name: laminas-json
 site_description: "De/Serialize JSON in PHP, including JavaScript expressions"
-repo_url: 'https://github.com/zendframework/zend-json'
+repo_url: 'https://github.com/laminas/laminas-json'
