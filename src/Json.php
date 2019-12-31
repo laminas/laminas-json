@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @see       https://github.com/zendframwork/zend-json for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframwork/zend-json/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json;
+namespace Laminas\Json;
 
+use Laminas\Json\Exception\RuntimeException;
 use SplQueue;
-use Zend\Json\Exception\RuntimeException;
 
 /**
  * Class for encoding to and decoding from JSON.
@@ -62,10 +63,10 @@ class Json
      *
      * NOTE: Only public variables will be encoded
      *
-     * NOTE: Encoding native javascript expressions are possible using Zend\Json\Expr.
+     * NOTE: Encoding native javascript expressions are possible using Laminas\Json\Expr.
      *       You can enable this by setting $options['enableJsonExprFinder'] = true
      *
-     * @see Zend\Json\Expr
+     * @see Laminas\Json\Expr
      *
      * @param  mixed $valueToEncode
      * @param  bool $cycleCheck Optional; whether or not to check for object recursion; off by default
@@ -96,7 +97,7 @@ class Json
         $prettyPrint = (isset($options['prettyPrint']) && ($options['prettyPrint'] === true));
         $encodedResult = self::encodeValue($valueToEncode, $cycleCheck, $options, $prettyPrint);
 
-        // Post-process to revert back any Zend\Json\Expr instances.
+        // Post-process to revert back any Laminas\Json\Expr instances.
         $encodedResult = self::injectJavascriptExpressions($encodedResult, $javascriptExpressions);
 
         return $encodedResult;
@@ -105,7 +106,7 @@ class Json
     /**
      * Discover and replace javascript expressions with temporary placeholders.
      *
-     * Check each value to determine if it is a Zend\Json\Expr; if so, replace the value with
+     * Check each value to determine if it is a Laminas\Json\Expr; if so, replace the value with
      * a magic key and add the javascript expression to the queue.
      *
      * NOTE this method is recursive.

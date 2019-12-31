@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframwork/zend-json for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframwork/zend-json/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json\TestAsset;
+namespace LaminasTest\Json\TestAsset;
 
 use ArrayIterator;
 use IteratorAggregate;
 
 /**
- * @see ZF-12347
+ * @see Laminas-12347
  */
 class TestIteratorAggregate implements IteratorAggregate
 {
