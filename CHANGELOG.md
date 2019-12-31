@@ -18,6 +18,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#3](https://github.com/zendframework/zend-json/pull/3) fixes an array key
+- [zendframework/zend-json#3](https://github.com/zendframework/zend-json/pull/3) fixes an array key
   name from `intent` to `indent` to  ensure indentation works correctly during
   pretty printing.
