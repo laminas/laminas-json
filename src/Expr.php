@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-json for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-json/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json;
+namespace Laminas\Json;
 
 /**
  * Encode a string to a native JavaScript expression.
  *
  * This class simply holds a string with a native JavaScript expression,
- * so objects or arrays to be encoded with Zend\Json\Json can contain native
+ * so objects or arrays to be encoded with Laminas\Json\Json can contain native
  * JavaScript expressions.
  *
  * Example:
@@ -20,12 +21,12 @@ namespace Zend\Json;
  * $foo = array(
  *     'integer'  => 9,
  *     'string'   => 'test string',
- *     'function' => Zend\Json\Expr(
- *         'function () { window.alert("javascript function encoded by Zend\Json\Json") }'
+ *     'function' => Laminas\Json\Expr(
+ *         'function () { window.alert("javascript function encoded by Laminas\Json\Json") }'
  *     ),
  * );
  *
- * echo Zend\Json\Json::encode($foo, false, ['enableJsonExprFinder' => true]);
+ * echo Laminas\Json\Json::encode($foo, false, ['enableJsonExprFinder' => true]);
  * </code>
  *
  * The above returns the following JSON (formatted for readability):
@@ -34,7 +35,7 @@ namespace Zend\Json;
  * {
  *   "integer": 9,
  *   "string": "test string",
- *   "function": function () {window.alert("javascript function encoded by Zend\Json\Json")}
+ *   "function": function () {window.alert("javascript function encoded by Laminas\Json\Json")}
  * }
  * </code>
  */

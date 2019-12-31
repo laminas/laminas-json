@@ -8,15 +8,15 @@
 
 namespace LaminasTest\Json\TestAsset;
 
-use JsonSerializable;
+use Laminas\Json\Json;
 
 /**
- * Implementation of the built-in JsonSerializable interface.
+ * Serializable class exposing both toArray() and toJson() methods.
  */
-class JsonSerializableBuiltinImpl implements JsonSerializable
+class Laminas11167ToArrayToJsonClass extends Laminas11167ToArrayClass
 {
-    public function jsonSerialize()
+    public function toJson()
     {
-        return [__FUNCTION__];
+        return Json::encode('bogus');
     }
 }

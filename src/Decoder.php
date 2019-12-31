@@ -1,15 +1,16 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-json for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-json/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json;
+namespace Laminas\Json;
 
+use Laminas\Json\Exception\InvalidArgumentException;
+use Laminas\Json\Exception\RuntimeException;
 use stdClass;
-use Zend\Json\Exception\InvalidArgumentException;
-use Zend\Json\Exception\RuntimeException;
 
 /**
  * Decode JSON encoded string to PHP variable constructs
@@ -232,7 +233,7 @@ class Decoder
     /**
      * Decodes an object of the form { "attribute: value, "attribute2" : value, ... }
      *
-     * If Zend\Json\Encoder was used to encode the original object, then
+     * If Laminas\Json\Encoder was used to encode the original object, then
      * a special attribute called __className will specify a class
      * name with which to wrap the data contained within the encoded source.
      *

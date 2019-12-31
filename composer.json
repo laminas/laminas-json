@@ -1,41 +1,19 @@
 {
-    "name": "zendframework/zend-json",
+    "name": "laminas/laminas-json",
     "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
-        "zendframework",
+        "laminas",
         "json"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.zendframework.com/zend-json/",
-        "issues": "https://github.com/zendframework/zend-json/issues",
-        "source": "https://github.com/zendframework/zend-json",
-        "rss": "https://github.com/zendframework/zend-json/releases.atom",
-        "chat": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.23 || ^6.4.3",
-        "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-stdlib": "^2.7.7 || ^3.1"
-    },
-    "suggest": {
-        "zendframework/zend-json-server": "For implementing JSON-RPC servers",
-        "zendframework/zend-xml2json": "For converting XML documents to JSON"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Json\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\Json\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-json/",
+        "issues": "https://github.com/laminas/laminas-json/issues",
+        "source": "https://github.com/laminas/laminas-json",
+        "rss": "https://github.com/laminas/laminas-json/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -44,6 +22,29 @@
         "branch-alias": {
             "dev-master": "3.1.x-dev",
             "dev-develop": "3.2.x-dev"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-stdlib": "^2.7.7 || ^3.1",
+        "phpunit/phpunit": "^5.7.23 || ^6.4.3"
+    },
+    "suggest": {
+        "laminas/laminas-json-server": "For implementing JSON-RPC servers",
+        "laminas/laminas-xml2json": "For converting XML documents to JSON"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Json\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Json\\": "test/"
         }
     },
     "scripts": {
@@ -55,5 +56,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-json": "self.version"
     }
 }
