@@ -1,25 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json\Server;
+namespace LaminasTest\Json\Server;
 
-use Zend\Json\Server\Smd;
-use Zend\Json\Server;
-use Zend\Json\Server\Exception\InvalidArgumentException;
-use Zend\Json\Server\Exception\RuntimeException;
-use Zend\Json;
+use Laminas\Json;
+use Laminas\Json\Server;
+use Laminas\Json\Server\Exception\InvalidArgumentException;
+use Laminas\Json\Server\Exception\RuntimeException;
+use Laminas\Json\Server\Smd;
 
 /**
- * Test class for Zend_JSON_Server_Smd
+ * Test class for Laminas_JSON_Server_Smd
  *
- * @group      Zend_Json
- * @group      Zend_Json_Server
+ * @group      Laminas_Json
+ * @group      Laminas_Json_Server
  */
 class SmdTest extends \PHPUnit_Framework_TestCase
 {
@@ -383,7 +382,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF2-5624
+     * @group Laminas-5624
      */
     public function testSetOptionsShouldAccommodateToArrayOutput()
     {
@@ -400,7 +399,7 @@ class SmdTest extends \PHPUnit_Framework_TestCase
 
         $smdDestination = new Smd();
         // prior to fix the following resulted in:
-        // .. Zend\Json\Server\Exception\InvalidArgumentException
+        // .. Laminas\Json\Server\Exception\InvalidArgumentException
         // ... : SMD service description requires a name; none provided
         $smdDestination->setOptions($smdSource->toArray());
 
