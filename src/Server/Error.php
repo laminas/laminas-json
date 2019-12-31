@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server;
+namespace Laminas\Json\Server;
 
 class Error
 {
@@ -67,7 +66,7 @@ class Error
      * Set error code
      *
      * @param  int $code
-     * @return \Zend\Json\Server\Error
+     * @return \Laminas\Json\Server\Error
      */
     public function setCode($code)
     {
@@ -99,7 +98,7 @@ class Error
      * Set error message
      *
      * @param  string $message
-     * @return \Zend\Json\Server\Error
+     * @return \Laminas\Json\Server\Error
      */
     public function setMessage($message)
     {
@@ -125,7 +124,7 @@ class Error
      * Set error data
      *
      * @param  mixed $data
-     * @return \Zend\Json\Server\Error
+     * @return \Laminas\Json\Server\Error
      */
     public function setData($data)
     {
@@ -164,7 +163,7 @@ class Error
      */
     public function toJson()
     {
-        return \Zend\Json\Json::encode($this->toArray());
+        return \Laminas\Json\Json::encode($this->toArray());
     }
 
     /**
