@@ -1,26 +1,24 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json\Server;
+namespace LaminasTest\Json\Server;
 
-use Zend\Json\Server;
-use Zend\Json;
+use Laminas\Json;
+use Laminas\Json\Server;
 
 /**
- * Test class for Zend_JSON_Server_Response
+ * Test class for Laminas_JSON_Server_Response
  *
- * @category   Zend
- * @package    Zend_JSON_Server
+ * @category   Laminas
+ * @package    Laminas_JSON_Server
  * @subpackage UnitTests
- * @group      Zend_JSON
- * @group      Zend_JSON_Server
+ * @group      Laminas_JSON
+ * @group      Laminas_JSON_Server
  */
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,7 +30,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->response = new \Zend\Json\Server\Response();
+        $this->response = new \Laminas\Json\Server\Response();
     }
 
     public function testResultShouldBeNullByDefault()

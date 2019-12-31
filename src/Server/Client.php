@@ -1,21 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server;
+namespace Laminas\Json\Server;
 
-use Zend\Http\Client as HttpClient;
-use Zend\Server\Client as ServerClient;
+use Laminas\Http\Client as HttpClient;
+use Laminas\Server\Client as ServerClient;
 
 /**
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  * @subpackage Server
  */
 class Client implements ServerClient
@@ -132,7 +130,7 @@ class Client implements ServerClient
         ));
 
         if (!$headers->get('User-Agent')) {
-            $headers->addHeaderLine('User-Agent', 'Zend_Json_Server_Client');
+            $headers->addHeaderLine('User-Agent', 'Laminas_Json_Server_Client');
         }
 
         $this->httpClient->setRawBody($request->__toString());
