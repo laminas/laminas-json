@@ -1,22 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server\Exception;
+namespace Laminas\Json\Server\Exception;
 
-use Zend\Json\Exception;
+use Laminas\Json\Exception;
 
 /**
- * Thrown by Zend\Json\Server\Client when an JSON-RPC fault response is returned.
+ * Thrown by Laminas\Json\Server\Client when an JSON-RPC fault response is returned.
  *
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  * @subpackage Server
  */
 class ErrorException extends Exception\BadMethodCallException implements
