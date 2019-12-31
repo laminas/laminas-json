@@ -1,11 +1,11 @@
-# zend-json
+# laminas-json
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-json.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-json)
-[![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-json/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-json?branch=master)
+[![Build Status](https://travis-ci.org/laminas/laminas-json.svg?branch=master)](https://travis-ci.org/laminas/laminas-json)
+[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-json/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-json?branch=master)
 
-`Zend\Json` provides convenience methods for serializing native PHP to JSON and
+`Laminas\Json` provides convenience methods for serializing native PHP to JSON and
 decoding JSON to native PHP. For more information on JSON, visit the JSON
 [project site](http://www.json.org/).
 
-- File issues at https://github.com/zendframework/zend-json/issues
-- Documentation is at https://docs.zendframework.com/zend-json/
+- File issues at https://github.com/laminas/laminas-json/issues
+- Documentation is at https://docs.laminas.dev/laminas-json/

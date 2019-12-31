@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-json for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-json/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Exception;
+namespace Laminas\Json\Exception;
 
 class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {

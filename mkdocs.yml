@@ -1,6 +1,6 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
+nav:
     - index.md
     - Intro: intro.md
     - Reference:
@@ -8,7 +8,6 @@ pages:
       - "Advanced Usage": advanced.md
     - Migration:
       - "From v2 to v3": migration/v2-to-v3.md
-site_name: zend-json
-site_description: Zend\Json
-repo_url: 'https://github.com/zendframework/zend-json'
-copyright: 'Copyright (c) 2005-2017 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-json
+site_description: Laminas\Json
+repo_url: 'https://github.com/laminas/laminas-json'
