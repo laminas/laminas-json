@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server\Smd;
+namespace Laminas\Json\Server\Smd;
 
-use Zend\Json\Server;
-use Zend\Json\Server\Exception\InvalidArgumentException;
-use Zend\Json\Server\Smd;
+use Laminas\Json\Server;
+use Laminas\Json\Server\Exception\InvalidArgumentException;
+use Laminas\Json\Server\Smd;
 
 /**
  * Create Service Mapping Description for a method
  *
  * @todo       Revised method regex to allow NS; however, should SMD be revised to strip PHP NS instead when attaching functions?
- * @package    Zend_Json
+ * @package    Laminas_Json
  * @subpackage Server
  */
 class Service
@@ -107,7 +105,7 @@ class Service
      * Constructor
      *
      * @param  string|array $spec
-     * @throws Zend\Json\Server\Exception\InvalidArgumentException if no name provided
+     * @throws Laminas\Json\Server\Exception\InvalidArgumentException if no name provided
      */
     public function __construct($spec)
     {
@@ -126,7 +124,7 @@ class Service
      * Set object state
      *
      * @param  array $options
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function setOptions(array $options)
     {
@@ -147,8 +145,8 @@ class Service
      * Set service name
      *
      * @param  string $name
-     * @return Zend\Json\Server\Smd\Service
-     * @throws Zend\Json\Server\Exception\InvalidArgumentException
+     * @return Laminas\Json\Server\Smd\Service
+     * @throws Laminas\Json\Server\Exception\InvalidArgumentException
      */
     public function setName($name)
     {
@@ -176,7 +174,7 @@ class Service
      * Currently limited to POST
      *
      * @param  string $transport
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function setTransport($transport)
     {
@@ -202,7 +200,7 @@ class Service
      * Set service target
      *
      * @param  string $target
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function setTarget($target)
     {
@@ -224,7 +222,7 @@ class Service
      * Set envelope type
      *
      * @param  string $envelopeType
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function setEnvelope($envelopeType)
     {
@@ -252,7 +250,7 @@ class Service
      * @param  string|array $type
      * @param  array $options
      * @param  int|null $order
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function addParam($type, array $options = array(), $order = null)
     {
@@ -294,7 +292,7 @@ class Service
      * Each param should be an array, and should include the key 'type'.
      *
      * @param  array $params
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function addParams(array $params)
     {
@@ -317,7 +315,7 @@ class Service
      * Overwrite all parameters
      *
      * @param  array $params
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function setParams(array $params)
     {
@@ -355,7 +353,7 @@ class Service
      * Set return type
      *
      * @param  string|array $type
-     * @return Zend\Json\Server\Smd\Service
+     * @return Laminas\Json\Server\Smd\Service
      */
     public function setReturn($type)
     {
@@ -411,7 +409,7 @@ class Service
     public function toJson()
     {
         $service = array($this->getName() => $this->toArray());
-        return \Zend\Json\Json::encode($service);
+        return \Laminas\Json\Json::encode($service);
     }
 
     /**

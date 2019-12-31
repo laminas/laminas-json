@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json;
+namespace Laminas\Json;
 
-use Zend\Json\Exception\InvalidArgumentException;
-use Zend\Json\Exception\RuntimeException;
+use Laminas\Json\Exception\InvalidArgumentException;
+use Laminas\Json\Exception\RuntimeException;
 
 /**
  * Decode JSON encoded string to PHP variable constructs
  *
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  */
 class Decoder
 {
@@ -83,7 +81,7 @@ class Decoder
      *
      * @param string $source String source to decode
      * @param int $decodeType How objects should be decoded -- see
-     * {@link Zend_Json::TYPE_ARRAY} and {@link Zend_Json::TYPE_OBJECT} for
+     * {@link Laminas_Json::TYPE_ARRAY} and {@link Laminas_Json::TYPE_OBJECT} for
      * valid values
      * @return void
      */
@@ -122,15 +120,15 @@ class Decoder
      *         - array of one or more of the above types
      *
      * By default, decoded objects will be returned as associative arrays; to
-     * return a StdClass object instead, pass {@link Zend_Json::TYPE_OBJECT} to
+     * return a StdClass object instead, pass {@link Laminas_Json::TYPE_OBJECT} to
      * the $objectDecodeType parameter.
      *
      * @static
      * @access public
      * @param string $source String to be decoded
      * @param int $objectDecodeType How objects should be decoded; should be
-     * either or {@link Zend_Json::TYPE_ARRAY} or
-     * {@link Zend_Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
+     * either or {@link Laminas_Json::TYPE_ARRAY} or
+     * {@link Laminas_Json::TYPE_OBJECT}; defaults to TYPE_ARRAY
      * @return mixed
      */
     public static function decode($source, $objectDecodeType = Json::TYPE_OBJECT)
@@ -168,7 +166,7 @@ class Decoder
      * Decodes an object of the form:
      *  { "attribute: value, "attribute2" : value,...}
      *
-     * If Zend_Json_Encoder was used to encode the original object then
+     * If Laminas_Json_Encoder was used to encode the original object then
      * a special attribute called __className which specifies a class
      * name that should wrap the data contained within the encoded source.
      *
@@ -177,7 +175,7 @@ class Decoder
      * array.
      *
      * @return array|StdClass
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws Laminas\Json\Exception\RuntimeException
      */
     protected function _decodeObject()
     {
@@ -237,7 +235,7 @@ class Decoder
      *    [element, element2,...,elementN]
      *
      * @return array
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws Laminas\Json\Exception\RuntimeException
      */
     protected function _decodeArray()
     {
@@ -288,7 +286,7 @@ class Decoder
      * Retrieves the next token from the source stream
      *
      * @return int Token constant value specified in class definition
-     * @throws Zend\Json\Exception\RuntimeException
+     * @throws Laminas\Json\Exception\RuntimeException
      */
     protected function _getNextToken()
     {

@@ -1,20 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json;
+namespace Laminas\Json;
 
 /**
- * Class for Zend_Json encode method.
+ * Class for Laminas_Json encode method.
  *
  * This class simply holds a string with a native Javascript Expression,
- * so objects | arrays to be encoded with Zend_Json can contain native
+ * so objects | arrays to be encoded with Laminas_Json can contain native
  * Javascript Expressions.
  *
  * Example:
@@ -22,18 +20,18 @@ namespace Zend\Json;
  * $foo = array(
  *     'integer'  =>9,
  *     'string'   =>'test string',
- *     'function' => Zend_Json_Expr(
- *         'function() { window.alert("javascript function encoded by Zend_Json") }'
+ *     'function' => Laminas_Json_Expr(
+ *         'function() { window.alert("javascript function encoded by Laminas_Json") }'
  *     ),
  * );
  *
- * Zend_Json::encode($foo, false, array('enableJsonExprFinder' => true));
+ * Laminas_Json::encode($foo, false, array('enableJsonExprFinder' => true));
  * // it will returns json encoded string:
- * // {"integer":9,"string":"test string","function":function() {window.alert("javascript function encoded by Zend_Json")}}
+ * // {"integer":9,"string":"test string","function":function() {window.alert("javascript function encoded by Laminas_Json")}}
  * </code>
  *
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  * @subpackage Expr
  */
 class Expr

@@ -1,25 +1,23 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json;
+namespace Laminas\Json;
 
 use Iterator;
 use IteratorAggregate;
-use Zend\Json\Exception\InvalidArgumentException;
-use Zend\Json\Exception\RecursionException;
+use Laminas\Json\Exception\InvalidArgumentException;
+use Laminas\Json\Exception\RecursionException;
 
 /**
  * Encode PHP constructs to JSON
  *
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  */
 class Encoder
 {
@@ -104,7 +102,7 @@ class Encoder
      *
      * @param $value object
      * @return string
-     * @throws Zend\Json\Exception\RecursionException If recursive checks are enabled
+     * @throws Laminas\Json\Exception\RecursionException If recursive checks are enabled
      *                                                and the object has been serialized previously
      */
     protected function _encodeObject(&$value)
@@ -398,7 +396,7 @@ class Encoder
      * @param $package string Optional package name appended to JavaScript
      * proxy class name
      * @return string The class2 (JavaScript) encoding of the class
-     * @throws Zend\Json\Exception\InvalidArgumentException
+     * @throws Laminas\Json\Exception\InvalidArgumentException
      */
     public static function encodeClass($className, $package = '')
     {

@@ -1,21 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server;
+namespace Laminas\Json\Server;
 
-use Zend\Json\Server\Exception\InvalidArgumentException;
-use Zend\Json\Server\Exception\RuntimeException;
+use Laminas\Json\Server\Exception\InvalidArgumentException;
+use Laminas\Json\Server\Exception\RuntimeException;
 
 /**
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  * @subpackage Server
  */
 class Smd
@@ -114,7 +112,7 @@ class Smd
      * Set transport
      *
      * @param  string $transport
-     * @return \Zend\Json\Server\Smd
+     * @return \Laminas\Json\Server\Smd
      */
     public function setTransport($transport)
     {
@@ -165,7 +163,7 @@ class Smd
      * Set content type
      *
      * @param  string $type
-     * @return \Zend\Json\Server\Smd
+     * @return \Laminas\Json\Server\Smd
      */
     public function setContentType($type)
     {
@@ -446,7 +444,7 @@ class Smd
      */
     public function toJson()
     {
-        return \Zend\Json\Json::encode($this->toArray());
+        return \Laminas\Json\Json::encode($this->toArray());
     }
 
     /**
