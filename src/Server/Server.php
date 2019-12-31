@@ -1,25 +1,23 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Json
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Json\Server;
+namespace Laminas\Json\Server;
 
+use Laminas\Server\AbstractServer;
+use Laminas\Server\Definition;
+use Laminas\Server\Method;
+use Laminas\Server\Reflection;
 use ReflectionFunction;
 use ReflectionMethod;
-use Zend\Server\AbstractServer;
-use Zend\Server\Definition;
-use Zend\Server\Method;
-use Zend\Server\Reflection;
 
 /**
- * @category   Zend
- * @package    Zend_Json
+ * @category   Laminas
+ * @package    Laminas_Json
  */
 class Server extends AbstractServer
 {
@@ -37,7 +35,7 @@ class Server extends AbstractServer
     protected $returnResponse = false;
 
     /**
-     * Inherited from Zend\Server\AbstractServer
+     * Inherited from Laminas\Server\AbstractServer
      *
      * @var bool Flag; allow overwriting existing methods when creating server definition
      */
@@ -465,7 +463,7 @@ class Server extends AbstractServer
     {
         if (null === $this->smdMethods) {
             $this->smdMethods = array();
-            $methods = get_class_methods('Zend\\Json\\Server\\Smd');
+            $methods = get_class_methods('Laminas\\Json\\Server\\Smd');
             foreach ($methods as $method) {
                 if (!preg_match('/^(set|get)/', $method)) {
                     continue;
