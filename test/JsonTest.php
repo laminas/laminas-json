@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json;
+namespace LaminasTest\Json;
 
-use Zend\Json;
+use Laminas\Json;
 
 /**
- * @group      Zend_JSON
+ * @group      Laminas_JSON
  */
 class JsonTest extends \PHPUnit_Framework_TestCase
 {
@@ -311,7 +310,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test that version numbers such as 4.10 are encoded and decoded properly;
-     * See ZF-377
+     * See Laminas-377
      */
     public function testEncodeReleaseNumber()
     {
@@ -322,7 +321,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests that spaces/linebreaks prior to a closing right bracket don't throw
-     * exceptions. See ZF-283.
+     * exceptions. See Laminas-283.
      */
     public function testEarlyLineBreak()
     {
@@ -336,7 +335,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-504
+     * @group Laminas-504
      */
     public function testEncodeEmptyArrayAsStruct()
     {
@@ -344,38 +343,38 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-504
+     * @group Laminas-504
      */
     public function testDecodeBorkedJsonShouldThrowException1()
     {
-        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\Json\Exception\RuntimeException');
         Json\Decoder::decode('[a"],["a],[][]');
     }
 
     /**
-     * @group ZF-504
+     * @group Laminas-504
      */
     public function testDecodeBorkedJsonShouldThrowException2()
     {
-        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\Json\Exception\RuntimeException');
         Json\Decoder::decode('[a"],["a]');
     }
 
     /**
-     * @group ZF-504
+     * @group Laminas-504
      */
     public function testOctalValuesAreNotSupportedInJsonNotation()
     {
-        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\Json\Exception\RuntimeException');
         Json\Decoder::decode('010');
     }
 
     /**
-     * Tests for ZF-461
+     * Tests for Laminas-461
      *
      * Check to see that cycling detection works properly
      */
-    public function testZf461()
+    public function testLaminas461()
     {
         $item1 = new Item();
         $item2 = new Item();
@@ -387,17 +386,17 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $encoded = Json\Encoder::encode($everything);
 
         // should fail
-        $this->setExpectedException('Zend\Json\Exception\RecursionException');
+        $this->setExpectedException('Laminas\Json\Exception\RecursionException');
         Json\Encoder::encode($everything, true);
     }
 
     /**
-     * Test for ZF-4053
+     * Test for Laminas-4053
      *
      * Check to see that cyclical exceptions are silenced when
      * $option['silenceCyclicalExceptions'] = true is used
      */
-    public function testZf4053()
+    public function testLaminas4053()
     {
         $item1 = new Item();
         $item2 = new Item();
@@ -409,7 +408,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         Json\Json::$useBuiltinEncoderDecoder = true;
         $encoded = Json\Json::encode($everything, true, $options);
-        $json = '{"allItems":[{"__className":"ZendTest\\\\Json\\\\Item"},{"__className":"ZendTest\\\\Json\\\\Item"}],"currentItem":"* RECURSION (ZendTest\\\\Json\\\\Item) *"}';
+        $json = '{"allItems":[{"__className":"LaminasTest\\\\Json\\\\Item"},{"__className":"LaminasTest\\\\Json\\\\Item"}],"currentItem":"* RECURSION (LaminasTest\\\\Json\\\\Item) *"}';
 
         $this->assertEquals($json, $encoded);
     }
@@ -421,7 +420,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $decoded = Json\Decoder::decode($encoded, Json\Json::TYPE_OBJECT);
 
         $this->assertTrue(isset($decoded->__className));
-        $this->assertEquals('ZendTest\Json\Object', $decoded->__className);
+        $this->assertEquals('LaminasTest\Json\Object', $decoded->__className);
         $this->assertTrue(isset($decoded->foo));
         $this->assertEquals('bar', $decoded->foo);
         $this->assertTrue(isset($decoded->bar));
@@ -431,9 +430,9 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     public function testEncodeClass()
     {
-        $encoded = Json\Encoder::encodeClass('ZendTest\Json\Object');
+        $encoded = Json\Encoder::encodeClass('LaminasTest\Json\Object');
 
-        $this->assertContains("Class.create('ZendTest\\Json\\Object'", $encoded);
+        $this->assertContains("Class.create('LaminasTest\\Json\\Object'", $encoded);
         $this->assertContains("ZAjaxEngine.invokeRemoteMethod(this, 'foo'", $encoded);
         $this->assertContains("ZAjaxEngine.invokeRemoteMethod(this, 'bar'", $encoded);
         $this->assertNotContains("ZAjaxEngine.invokeRemoteMethod(this, 'baz'", $encoded);
@@ -444,10 +443,10 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     public function testEncodeClasses()
     {
-        $encoded = Json\Encoder::encodeClasses(array('ZendTest\Json\Object', 'Zend\Json\Json'));
+        $encoded = Json\Encoder::encodeClasses(array('LaminasTest\Json\Object', 'Laminas\Json\Json'));
 
-        $this->assertContains("Class.create('ZendTest\\Json\\Object'", $encoded);
-        $this->assertContains("Class.create('Zend\\Json\\Json'", $encoded);
+        $this->assertContains("Class.create('LaminasTest\\Json\\Object'", $encoded);
+        $this->assertContains("Class.create('Laminas\\Json\\Json'", $encoded);
     }
 
     public function testToJSONSerialization()
@@ -472,52 +471,52 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('["jsonSerialize"]', $encoded);
     }
 
-    public function testJsonSerializableWithZFImplementation()
+    public function testJsonSerializableWithLaminasImplementation()
     {
         $encoded = Json\Encoder::encode(
-            new TestAsset\JsonSerializableZFImpl()
+            new TestAsset\JsonSerializableLaminasImpl()
         );
 
         $this->assertEquals('["jsonSerialize"]', $encoded);
     }
 
     /**
-     * test encoding array with Zend_JSON_Expr
+     * test encoding array with Laminas_JSON_Expr
      *
-     * @group ZF-4946
+     * @group Laminas-4946
      */
     public function testEncodingArrayWithExpr()
     {
-        $expr = new Json\Expr('window.alert("Zend JSON Expr")');
+        $expr = new Json\Expr('window.alert("Laminas JSON Expr")');
         $array = array('expr'=>$expr, 'int'=>9, 'string'=>'text');
         $result = Json\Json::encode($array, false, array('enableJsonExprFinder' => true));
-        $expected = '{"expr":window.alert("Zend JSON Expr"),"int":9,"string":"text"}';
+        $expected = '{"expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * test encoding object with Zend_JSON_Expr
+     * test encoding object with Laminas_JSON_Expr
      *
-     * @group ZF-4946
+     * @group Laminas-4946
      */
     public function testEncodingObjectWithExprAndInternalEncoder()
     {
         Json\Json::$useBuiltinEncoderDecoder = true;
 
-        $expr = new Json\Expr('window.alert("Zend JSON Expr")');
+        $expr = new Json\Expr('window.alert("Laminas JSON Expr")');
         $obj = new \stdClass();
         $obj->expr = $expr;
         $obj->int = 9;
         $obj->string = 'text';
         $result = Json\Json::encode($obj, false, array('enableJsonExprFinder' => true));
-        $expected = '{"__className":"stdClass","expr":window.alert("Zend JSON Expr"),"int":9,"string":"text"}';
+        $expected = '{"__className":"stdClass","expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * test encoding object with Zend_JSON_Expr
+     * test encoding object with Laminas_JSON_Expr
      *
-     * @group ZF-4946
+     * @group Laminas-4946
      */
     public function testEncodingObjectWithExprAndExtJSON()
     {
@@ -527,20 +526,20 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         Json\Json::$useBuiltinEncoderDecoder = false;
 
-        $expr = new Json\Expr('window.alert("Zend JSON Expr")');
+        $expr = new Json\Expr('window.alert("Laminas JSON Expr")');
         $obj = new \stdClass();
         $obj->expr = $expr;
         $obj->int = 9;
         $obj->string = 'text';
         $result = Json\Json::encode($obj, false, array('enableJsonExprFinder' => true));
-        $expected = '{"expr":window.alert("Zend JSON Expr"),"int":9,"string":"text"}';
+        $expected = '{"expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * test encoding object with ToJSON and Zend_JSON_Expr
+     * test encoding object with ToJSON and Laminas_JSON_Expr
      *
-     * @group ZF-4946
+     * @group Laminas-4946
      */
     public function testToJSONWithExpr()
     {
@@ -548,14 +547,14 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
         $obj = new ToJSONWithExpr();
         $result = Json\Json::encode($obj, false, array('enableJsonExprFinder' => true));
-        $expected = '{"expr":window.alert("Zend JSON Expr"),"int":9,"string":"text"}';
+        $expected = '{"expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
 
     /**
-     * Regression tests for Zend\Json\Expr and multiple keys with the same name.
+     * Regression tests for Laminas\Json\Expr and multiple keys with the same name.
      *
-     * @group ZF-4946
+     * @group Laminas-4946
      */
     public function testEncodingMultipleNestedSwitchingSameNameKeysWithDifferentJSONExprSettings()
     {
@@ -582,9 +581,9 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Regression tests for Zend\Json\Expr and multiple keys with the same name.
+     * Regression tests for Laminas\Json\Expr and multiple keys with the same name.
      *
-     * @group ZF-4946
+     * @group Laminas-4946
      */
     public function testEncodingMultipleNestedIteratedSameNameKeysWithDifferentJSONExprSettings()
     {
@@ -623,13 +622,13 @@ class JsonTest extends \PHPUnit_Framework_TestCase
         $result = Json\Json::encode($data);
 
         $this->assertEquals(
-            '[{"alpha":{"__className":"Zend\\\\Json\\\\Expr"},"beta":"gamma"}]',
+            '[{"alpha":{"__className":"Laminas\\\\Json\\\\Expr"},"beta":"gamma"}]',
             $result
         );
     }
 
     /**
-     * @group ZF-4054
+     * @group Laminas-4054
      */
     public function testEncodeWithUtf8IsTransformedToPackedSyntax()
     {
@@ -640,7 +639,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4054
+     * @group Laminas-4054
      *
      * This test contains assertions from the Solar Framework by Paul M. Jones
      * @link http://solarphp.com
@@ -657,7 +656,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4054
+     * @group Laminas-4054
      */
     public function testEncodeUnicodeStringSolarRegression()
     {
@@ -675,7 +674,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4054
+     * @group Laminas-4054
      */
     public function testDecodeUnicodeStringSolarRegression()
     {
@@ -693,7 +692,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4054
+     * @group Laminas-4054
      *
      * This test contains assertions from the Solar Framework by Paul M. Jones
      * @link http://solarphp.com
@@ -716,7 +715,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4946
+     * @group Laminas-4946
      */
     public function testUtf8JSONExprFinder()
     {
@@ -732,7 +731,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-4437
+     * @group Laminas-4437
      */
     public function testCommaDecimalIsConvertedToCorrectJSONWithDot()
     {
@@ -759,19 +758,19 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-12347
+     * @group Laminas-12347
      */
     public function testEncodeObjectImplementingIteratorAggregate()
     {
         $iterator = new TestAsset\TestIteratorAggregate();
-        $target = '{"__className":"ZendTest\\\\Json\\\\TestAsset\\\\TestIteratorAggregate","foo":"bar","baz":5}';
+        $target = '{"__className":"LaminasTest\\\\Json\\\\TestAsset\\\\TestIteratorAggregate","foo":"bar","baz":5}';
 
         Json\Json::$useBuiltinEncoderDecoder = true;
         $this->assertEquals($target, Json\Json::encode($iterator));
     }
 
     /**
-     * @group ZF-8663
+     * @group Laminas-8663
      */
     public function testNativeJSONEncoderWillProperlyEncodeSolidusInStringValues()
     {
@@ -794,7 +793,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-8663
+     * @group Laminas-8663
      */
     public function testBuiltinJSONEncoderWillProperlyEncodeSolidusInStringValues()
     {
@@ -817,18 +816,18 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-8918
+     * @group Laminas-8918
      */
     public function testDecodingInvalidJSONShouldRaiseAnException()
     {
-        $this->setExpectedException('Zend\Json\Exception\RuntimeException');
+        $this->setExpectedException('Laminas\Json\Exception\RuntimeException');
         Json\Json::decode(' some string ');
     }
 
     /**
      * Encoding an iterator using the internal encoder should handle undefined keys
      *
-     * @group ZF-9416
+     * @group Laminas-9416
      */
     public function testIteratorWithoutDefinedKey()
     {
@@ -841,7 +840,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     /**
      * The default json decode type should be TYPE_OBJECT
      *
-     * @group ZF-8618
+     * @group Laminas-8618
      */
     public function testDefaultTypeObject()
     {
@@ -849,7 +848,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-10185
+     * @group Laminas-10185
      */
     public function testJsonPrettyPrintWorksWithArrayNotationInStringLiteral()
     {
@@ -904,22 +903,22 @@ EOB;
     }
 
     /**
-     * @group ZF-11167
+     * @group Laminas-11167
      */
     public function testEncodeWillUseToArrayMethodWhenAvailable()
     {
-        $o = new ZF11167_ToArrayClass();
+        $o = new Laminas11167_ToArrayClass();
         $objJson = Json\Json::encode($o);
         $arrJson = Json\Json::encode($o->toArray());
         $this->assertSame($arrJson, $objJson);
     }
 
     /**
-     * @group ZF-11167
+     * @group Laminas-11167
      */
     public function testEncodeWillUseToJsonWhenBothToJsonAndToArrayMethodsAreAvailable()
     {
-        $o = new ZF11167_ToArrayToJsonClass();
+        $o = new Laminas11167_ToArrayToJsonClass();
         $objJson = Json\Json::encode($o);
         $this->assertEquals('"bogus"', $objJson);
         $arrJson = Json\Json::encode($o->toArray());
@@ -927,12 +926,12 @@ EOB;
     }
 
     /**
-     * @group ZF-9521
+     * @group Laminas-9521
      */
     public function testWillEncodeArrayOfObjectsEachWithToJsonMethod()
     {
         $array = array('one'=>new ToJsonClass());
-        $expected = '{"one":{"__className":"ZendTest\\\\Json\\\\ToJSONClass","firstName":"John","lastName":"Doe","email":"john@doe.com"}}';
+        $expected = '{"one":{"__className":"LaminasTest\\\\Json\\\\ToJSONClass","firstName":"John","lastName":"Doe","email":"john@doe.com"}}';
 
         Json\Json::$useBuiltinEncoderDecoder = true;
         $json = Json\Encoder::encode($array);
@@ -940,7 +939,7 @@ EOB;
     }
 
     /**
-     * @group ZF-7586
+     * @group Laminas-7586
      */
     public function testWillDecodeStructureWithEmptyKeyToObjectProperly()
     {
@@ -955,14 +954,14 @@ EOB;
 }
 
 /**
- * Zend_JSONTest_Item: test item for use with testZf461()
+ * Laminas_JSONTest_Item: test item for use with testLaminas461()
  */
 class Item
 {
 }
 
 /**
- * Zend_JSONTest_Object: test class for encoding classes
+ * Laminas_JSONTest_Object: test class for encoding classes
  */
 class Object
 {
@@ -1008,9 +1007,9 @@ class ToJSONClass
 
 /**
  * Serializable class exposing a toArray() method
- * @group ZF-11167
+ * @group Laminas-11167
  */
-class ZF11167_ToArrayClass
+class Laminas11167_ToArrayClass
 {
     private $_firstName = 'John';
 
@@ -1031,9 +1030,9 @@ class ZF11167_ToArrayClass
 
 /**
  * Serializable class exposing both toArray() and toJson() methods
- * @group ZF-11167
+ * @group Laminas-11167
  */
-class ZF11167_ToArrayToJsonClass extends ZF11167_ToArrayClass
+class Laminas11167_ToArrayToJsonClass extends Laminas11167_ToArrayClass
 {
     public function toJson()
     {
@@ -1042,13 +1041,13 @@ class ZF11167_ToArrayToJsonClass extends ZF11167_ToArrayClass
 }
 
 /**
- * ISSUE  ZF-4946
+ * ISSUE  Laminas-4946
  */
 class ToJSONWithExpr
 {
     private $_string = 'text';
     private $_int = 9;
-    private $_expr = 'window.alert("Zend JSON Expr")';
+    private $_expr = 'window.alert("Laminas JSON Expr")';
 
     public function toJSON()
     {

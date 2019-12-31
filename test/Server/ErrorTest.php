@@ -1,22 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-json for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Json\Server;
+namespace LaminasTest\Json\Server;
 
-use Zend\Json\Server;
-use Zend\Json;
+use Laminas\Json;
+use Laminas\Json\Server;
 
 /**
- * Test class for Zend\JSON\Server\Error
+ * Test class for Laminas\JSON\Server\Error
  *
- * @group      Zend_JSON
- * @group      Zend_JSON_Server
+ * @group      Laminas_JSON
+ * @group      Laminas_JSON_Server
  */
 class ErrorTest extends \PHPUnit_Framework_TestCase
 {
