@@ -1,6 +1,6 @@
 # laminas-json
 
-[![Build Status](https://travis-ci.org/laminas/laminas-json.svg?branch=master)](https://travis-ci.org/laminas/laminas-json)
+[![Build Status](https://travis-ci.com/laminas/laminas-json.svg?branch=master)](https://travis-ci.com/laminas/laminas-json)
 [![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-json/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-json?branch=master)
 
 `Laminas\Json` provides convenience methods for serializing native PHP to JSON and
