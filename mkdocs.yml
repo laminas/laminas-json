@@ -13,4 +13,3 @@ site_description: "De/Serialize JSON in PHP, including JavaScript expressions"
 repo_url: 'https://github.com/laminas/laminas-json'
 extra:
     project: Components
-    project_url: 'https://docs.laminas.dev'
