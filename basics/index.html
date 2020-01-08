@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -242,12 +246,11 @@
     <h1 id="basic-usage">Basic Usage</h1>
 <p>Usage of laminas-json involves using two public static methods:
 <code>Laminas\Json\Json::encode()</code> and <code>Laminas\Json\Json::decode()</code>.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Decode a JSON value to PHP:</span>
-<span class=x>$phpNative = Laminas\Json\Json::decode($encodedValue);</span>
+<pre class=codehilite><code class=language-php>// Decode a JSON value to PHP:
+$phpNative = Laminas\Json\Json::decode($encodedValue);
 
-<span class=x>// Encode a PHP value to JSON:</span>
-<span class=x>$json = Laminas\Json\Json::encode($phpNative);</span>
-</pre></div></p>
+// Encode a PHP value to JSON:
+$json = Laminas\Json\Json::encode($phpNative);</code></pre>
 <blockquote>
 <h3>ext/json</h3>
 <p>By default, the above two calls will proxy to the <code>json_decode()</code> and
@@ -263,12 +266,11 @@ customizations around pretty printing.</p>
 <code>Laminas\Json\Json::encode()</code>, since it has no spacing or indentation. In order to
 make it easier, <code>Laminas\Json\Json</code> allows you to pretty-print JSON data in the
 human-readable format with <code>Laminas\Json\Json::prettyPrint()</code>.</p>
-<p> <div class=codehilite><pre><span></span><span class=x>// Encode it to return to the client:</span>
-<span class=x>$json = Laminas\Json\Json::encode($phpNative);</span>
-<span class=x>if ($debug) {</span>
-<span class=x>    echo Laminas\Json\Json::prettyPrint($json, array(&#39;indent&#39; =&gt; &#39; &#39;));</span>
-<span class=x>}</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>// Encode it to return to the client:
+$json = Laminas\Json\Json::encode($phpNative);
+if ($debug) {
+    echo Laminas\Json\Json::prettyPrint($json, array('indent' =&gt; ' '));
+}</code></pre>
 <p>The second, optional, argument to <code>Laminas\Json\Json::prettyPrint()</code> is an option
 array. Option <code>indent</code> allows providing an indentation string; by default, it
 uses four spaces.</p>
@@ -422,9 +424,10 @@ uses four spaces.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -461,7 +464,7 @@ uses four spaces.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-json//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-json/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -470,8 +473,8 @@ uses four spaces.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-json//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-json/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
