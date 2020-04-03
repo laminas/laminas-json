@@ -331,8 +331,9 @@ feel this could pose a substantial security risk.</p>
 <p>By default, <code>Laminas\Json\Json</code> will decode JSON objects as <code>stdClass</code> objects.
 However, if you desire an associative array returned, you can request it using
 the second argument to <code>decode()</code>:</p>
-<pre class=codehilite><code class=language-php>// Decode JSON objects as PHP array
+<pre class="highlight"><code class="language-php">// Decode JSON objects as PHP array
 $phpNative = Laminas\Json\Json::decode($encodedValue, Laminas\Json\Json::TYPE_ARRAY);</code></pre>
+
 <p>Any objects thus decoded are returned as associative arrays with keys and values
 corresponding to the key/value pairs in the JSON notation.</p>
 <p>The recommendation of Laminas is that the individual developer should
@@ -347,16 +348,18 @@ expects the object to return a JSON representation of its internal state.</p>
 <p><code>Laminas\Json\Json</code> can encode PHP objects recursively but does not do so by
 default. This can be enabled by passing <code>true</code> as the second argument to
 <code>Laminas\Json\Json::encode()</code>.</p>
-<pre class=codehilite><code class=language-php>// Encode PHP object recursively
+<pre class="highlight"><code class="language-php">// Encode PHP object recursively
 $jsonObject = Laminas\Json\Json::encode($data, true);</code></pre>
+
 <p>When doing recursive encoding of objects, as JSON does not support cycles, a
 <code>Laminas\Json\Exception\RecursionException</code> will be thrown. If you wish, you can
 silence these exceptions by passing the <code>silenceCyclicalExceptions</code> option:</p>
-<pre class=codehilite><code class=language-php>$jsonObject = Laminas\Json\Json::encode(
+<pre class="highlight"><code class="language-php">$jsonObject = Laminas\Json\Json::encode(
     $data,
     true,
     ['silenceCyclicalExceptions' =&gt; true]
 );</code></pre>
+
 <h2 id="internal-encoderdecoder">Internal Encoder/Decoder</h2>
 <p><code>Laminas\Json</code> has two different modes depending if ext/json is enabled in your PHP
 installation or not. If <code>ext/json</code> is installed, laminas-json will use the
@@ -366,7 +369,8 @@ for en/decoding. This is considerably slower than using the PHP extension, but
 behaves exactly the same.</p>
 <p>Sometimes you might want to use the laminas-json encoder/decoder even if you have
 <code>ext/json</code> installed. You can achieve this by calling:</p>
-<pre class=codehilite><code class=language-php>Laminas\Json\Json::$useBuiltinEncoderDecoder = true;</code></pre>
+<pre class="highlight"><code class="language-php">Laminas\Json\Json::$useBuiltinEncoderDecoder = true;</code></pre>
+
 <h2 id="json-expressions">JSON Expressions</h2>
 <p>JavaScript makes heavy use of anonymous function callbacks, which can be saved
 within JSON object variables. They only work if not returned inside double
@@ -381,10 +385,10 @@ pass the option <code>enableJsonExprFinder</code> and set it to <code>TRUE</code
 <code>encode()</code> method. If enabled, the expression support works for all nested
 expressions in large object structures.</p>
 <p>As an example:</p>
-<pre class=codehilite><code class=language-php>$data = [
+<pre class="highlight"><code class="language-php">$data = [
     'onClick' =&gt; new Laminas\Json\Expr(
         'function() {'
-        . 'alert(&quot;I am a valid JavaScript callback created by Laminas\\Json&quot;);
+        . 'alert("I am a valid JavaScript callback created by Laminas\\Json");
         . '}'
     ),
     'other' =&gt; 'no expression',

@@ -305,11 +305,12 @@
     <h1 id="basic-usage">Basic Usage</h1>
 <p>Usage of laminas-json involves using two public static methods:
 <code>Laminas\Json\Json::encode()</code> and <code>Laminas\Json\Json::decode()</code>.</p>
-<pre class=codehilite><code class=language-php>// Decode a JSON value to PHP:
+<pre class="highlight"><code class="language-php">// Decode a JSON value to PHP:
 $phpNative = Laminas\Json\Json::decode($encodedValue);
 
 // Encode a PHP value to JSON:
 $json = Laminas\Json\Json::encode($phpNative);</code></pre>
+
 <blockquote>
 <h3>ext/json</h3>
 <p>By default, the above two calls will proxy to the <code>json_decode()</code> and
@@ -325,11 +326,12 @@ customizations around pretty printing.</p>
 <code>Laminas\Json\Json::encode()</code>, since it has no spacing or indentation. In order to
 make it easier, <code>Laminas\Json\Json</code> allows you to pretty-print JSON data in the
 human-readable format with <code>Laminas\Json\Json::prettyPrint()</code>.</p>
-<pre class=codehilite><code class=language-php>// Encode it to return to the client:
+<pre class="highlight"><code class="language-php">// Encode it to return to the client:
 $json = Laminas\Json\Json::encode($phpNative);
 if ($debug) {
     echo Laminas\Json\Json::prettyPrint($json, array('indent' =&gt; ' '));
 }</code></pre>
+
 <p>The second, optional, argument to <code>Laminas\Json\Json::prettyPrint()</code> is an option
 array. Option <code>indent</code> allows providing an indentation string; by default, it
 uses four spaces.</p>
