@@ -100,7 +100,7 @@ As an example:
 $data = [
     'onClick' => new Laminas\Json\Expr(
         'function() {'
-        . 'alert("I am a valid JavaScript callback created by Laminas\\Json");
+        . 'alert("I am a valid JavaScript callback created by Laminas\\Json");'
         . '}'
     ),
     'other' => 'no expression',
