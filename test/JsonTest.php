@@ -17,12 +17,12 @@ class JsonTest extends TestCase
 {
     private $originalUseBuiltinEncoderDecoderValue;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->originalUseBuiltinEncoderDecoderValue = Json\Json::$useBuiltinEncoderDecoder;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Json\Json::$useBuiltinEncoderDecoder = $this->originalUseBuiltinEncoderDecoderValue;
     }
@@ -487,9 +487,12 @@ class JsonTest extends TestCase
         $encoded = Json\Encoder::encode($actual);
         $decoded = Json\Decoder::decode($encoded, Json\Json::TYPE_OBJECT);
 
-        $this->assertAttributeEquals(TestAsset\TestObject::class, '__className', $decoded);
-        $this->assertAttributeEquals('bar', 'foo', $decoded);
-        $this->assertAttributeEquals('baz', 'bar', $decoded);
+        $this->assertTrue(isset($decoded->__className));
+        $this->assertEquals(TestAsset\TestObject::class, $decoded->__className);
+        $this->assertTrue(isset($decoded->foo));
+        $this->assertEquals('bar', $decoded->foo);
+        $this->assertTrue(isset($decoded->bar));
+        $this->assertEquals('baz', $decoded->bar);
         $this->assertFalse(isset($decoded->_foo));
     }
 
@@ -497,21 +500,21 @@ class JsonTest extends TestCase
     {
         $encoded = Json\Encoder::encodeClass(TestAsset\TestObject::class);
 
-        $this->assertContains("Class.create('LaminasTest\\Json\\TestAsset\\TestObject'", $encoded);
-        $this->assertContains("ZAjaxEngine.invokeRemoteMethod(this, 'foo'", $encoded);
-        $this->assertContains("ZAjaxEngine.invokeRemoteMethod(this, 'bar'", $encoded);
-        $this->assertNotContains("ZAjaxEngine.invokeRemoteMethod(this, 'baz'", $encoded);
+        $this->assertStringContainsString("Class.create('LaminasTest\\Json\\TestAsset\\TestObject'", $encoded);
+        $this->assertStringContainsString("ZAjaxEngine.invokeRemoteMethod(this, 'foo'", $encoded);
+        $this->assertStringContainsString("ZAjaxEngine.invokeRemoteMethod(this, 'bar'", $encoded);
+        $this->assertStringNotContainsString("ZAjaxEngine.invokeRemoteMethod(this, 'baz'", $encoded);
 
-        $this->assertContains('variables:{foo:"bar",bar:"baz"}', $encoded);
-        $this->assertContains('constants:{FOO: "bar"}', $encoded);
+        $this->assertStringContainsString('variables:{foo:"bar",bar:"baz"}', $encoded);
+        $this->assertStringContainsString('constants:{FOO: "bar"}', $encoded);
     }
 
     public function testEncodeClasses()
     {
         $encoded = Json\Encoder::encodeClasses(['LaminasTest\Json\TestAsset\TestObject', 'Laminas\Json\Json']);
 
-        $this->assertContains("Class.create('LaminasTest\\Json\\TestAsset\\TestObject'", $encoded);
-        $this->assertContains("Class.create('Laminas\\Json\\Json'", $encoded);
+        $this->assertStringContainsString("Class.create('LaminasTest\\Json\\TestAsset\\TestObject'", $encoded);
+        $this->assertStringContainsString("Class.create('Laminas\\Json\\Json'", $encoded);
     }
 
     public function testToJSONSerialization()
@@ -1186,6 +1189,7 @@ EOB;
 
         $json = '{"":"test"}';
         $object = Json\Json::decode($json, Json\Json::TYPE_OBJECT);
-        $this->assertAttributeEquals('test', '_empty_', $object);
+        $this->assertTrue(isset($object->_empty_));
+        $this->assertEquals('test', $object->_empty_);
     }
 }

@@ -19,13 +19,13 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.3 || ~8.0.0",
         "laminas/laminas-zendframework-bridge": "^1.0"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
         "laminas/laminas-stdlib": "^2.7.7 || ^3.1",
-        "phpunit/phpunit": "^5.7.23 || ^6.4.3"
+        "phpunit/phpunit": "^9.3"
     },
     "suggest": {
         "laminas/laminas-json-server": "For implementing JSON-RPC servers",
