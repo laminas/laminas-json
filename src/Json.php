@@ -113,7 +113,7 @@ class Json
      *
      * NOTE: This method is used internally by the encode method.
      *
-     * @see encode
+     * @see encode()
      * @param mixed $value a string - object property to be encoded
      * @param SplQueue $javascriptExpressions
      * @param null|string|int $currentKey

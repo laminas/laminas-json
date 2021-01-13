@@ -212,7 +212,7 @@ class Decoder
     /**
      * Recursive routine for supported toplevel types.
      *
-     * @return mixed
+     * @return mixed|void
      */
     protected function decodeValue()
     {
@@ -220,11 +220,11 @@ class Decoder
             case self::DATUM:
                 $result  = $this->tokenValue;
                 $this->getNextToken();
-                return($result);
+                return $result;
             case self::LBRACE:
-                return($this->decodeObject());
+                return $this->decodeObject();
             case self::LBRACKET:
-                return($this->decodeArray());
+                return $this->decodeArray();
             default:
                 return;
         }

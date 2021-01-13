@@ -84,7 +84,7 @@ class Encoder
      * @param $value mixed The value to be encoded.
      * @return string Encoded value.
      */
-    protected function encodeValue(&$value)
+    protected function encodeValue($value)
     {
         if (is_object($value)) {
             return $this->encodeObject($value);
@@ -109,7 +109,7 @@ class Encoder
      * @throws RecursionException If recursive checks are enabled and the
      *     object has been serialized previously.
      */
-    protected function encodeObject(&$value)
+    protected function encodeObject($value)
     {
         if ($this->cycleCheck) {
             if ($this->wasVisited($value)) {
@@ -165,7 +165,7 @@ class Encoder
      * @param mixed $value
      * @return bool
      */
-    protected function wasVisited(&$value)
+    protected function wasVisited($value)
     {
         if (in_array($value, $this->visited, true)) {
             return true;
