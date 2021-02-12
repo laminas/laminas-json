@@ -11,6 +11,7 @@ $phpNative = Laminas\Json\Json::decode($encodedValue);
 $json = Laminas\Json\Json::encode($phpNative);
 ```
 
+<!-- <!-- markdownlint-disable-next-line MD001 -->
 > ### ext/json
 >
 > By default, the above two calls will proxy to the `json_decode()` and
