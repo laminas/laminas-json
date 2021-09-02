@@ -1,19 +1,15 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-json for the canonical source repository
- * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\Json\TestAsset;
 
 use Exception;
 
 class Bar
 {
+    /** @var mixed */
     protected $val;
 
+    /** @param mixed $someval */
     public function __construct($someval)
     {
         $this->val = $someval;

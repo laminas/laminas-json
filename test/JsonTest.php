@@ -1,20 +1,32 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-json for the canonical source repository
- * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\Json;
 
 use ArrayIterator;
 use Laminas\Json;
+use LaminasTest\Json\TestAsset\TestObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+use function chr;
+use function extension_loaded;
+use function floatval;
+use function function_exists;
+use function is_array;
+use function is_object;
+use function is_scalar;
+use function json_encode;
+use function serialize;
+use function setlocale;
+use function sprintf;
+use function strcmp;
+use function var_export;
+
+use const LC_ALL;
+
 class JsonTest extends TestCase
 {
+    /** @var bool */
     private $originalUseBuiltinEncoderDecoderValue;
 
     public function setUp(): void
@@ -30,15 +42,14 @@ class JsonTest extends TestCase
     /**
      * Test encoding and decoding in a single step
      *
-     * @param scalar|array $values array of values to test against encode/decode
-     * @param $message
+     * @param scalar|array $values Value or array of values to test against encode/decode
+     * @param string|null $message
      */
-    public function assertEncodesToDecodable($values, $message = null)
+    public function assertEncodesToDecodable($values, $message = null): void
     {
         $message = $message ?: 'One or more values could not be decoded after encoding';
-
-        $values = is_null($values) ? [null] : $values;
-        $values = is_scalar($values) ? [$values] : $values;
+        $values  = $values ?? [null];
+        $values  = is_scalar($values) ? [$values] : $values;
 
         foreach ($values as $value) {
             $encoded = Json\Encoder::encode($value);
@@ -97,7 +108,8 @@ class JsonTest extends TestCase
         $this->assertFalse(Json\Decoder::decode(Json\Encoder::encode(false)));
     }
 
-    public function integerProvider()
+    /** @psalm-return array<string, array{0: int}> */
+    public function integerProvider(): array
     {
         return [
             'negative' => [-1],
@@ -108,14 +120,16 @@ class JsonTest extends TestCase
 
     /**
      * test integer encoding/decoding
+     *
      * @dataProvider integerProvider
      */
-    public function testInteger($int)
+    public function testInteger(int $int)
     {
         $this->assertEncodesToDecodable($int);
     }
 
-    public function floatProvider()
+    /** @psalm-return array<string, array{0: float}> */
+    public function floatProvider(): array
     {
         return [
             'negative' => [-1.1],
@@ -126,14 +140,16 @@ class JsonTest extends TestCase
 
     /**
      * test float encoding/decoding
+     *
      * @dataProvider floatProvider
      */
-    public function testFloat($float)
+    public function testFloat(float $float)
     {
         $this->assertEncodesToDecodable($float);
     }
 
-    public function stringProvider()
+    /** @psalm-return array<string, array{0: string}> */
+    public function stringProvider(): array
     {
         return [
             'empty'  => [''],
@@ -143,9 +159,10 @@ class JsonTest extends TestCase
 
     /**
      * test string encoding/decoding
+     *
      * @dataProvider stringProvider
      */
-    public function testString($string)
+    public function testString(string $string)
     {
         $this->assertEncodesToDecodable($string);
     }
@@ -157,7 +174,7 @@ class JsonTest extends TestCase
     {
         $string   = 'INFO: Path \\\\test\\123\\abc';
         $expected = '"INFO: Path \\\\\\\\test\\\\123\\\\abc"';
-        $encoded = Json\Encoder::encode($string);
+        $encoded  = Json\Encoder::encode($string);
         $this->assertEquals(
             $expected,
             $encoded,
@@ -232,9 +249,9 @@ class JsonTest extends TestCase
     public function testStringOfHtmlSpecialCharsEncodedToUnicodeEscapes()
     {
         Json\Json::$useBuiltinEncoderDecoder = false;
-        $expected = '"\\u003C\\u003E\\u0026\\u0027\\u0022"';
-        $string   = '<>&\'"';
-        $encoded  = Json\Encoder::encode($string);
+        $expected                            = '"\\u003C\\u003E\\u0026\\u0027\\u0022"';
+        $string                              = '<>&\'"';
+        $encoded                             = Json\Encoder::encode($string);
         $this->assertEquals(
             $expected,
             $encoded,
@@ -250,10 +267,12 @@ class JsonTest extends TestCase
      */
     public function testStringOfOtherSpecialCharsEncodedToUnicodeEscapes()
     {
+        // phpcs:disable Generic.Files.LineLength.TooLong
         Json\Json::$useBuiltinEncoderDecoder = false;
-        $string   = "\\ - \n - \t - \r - " . chr(0x08) . " - " . chr(0x0C) . " - / - \v";
-        $encoded  = '"\u005C - \u000A - \u0009 - \u000D - \u0008 - \u000C - \u002F - \u000B"';
+        $string                              = "\\ - \n - \t - \r - " . chr(0x08) . " - " . chr(0x0C) . " - / - \v";
+        $encoded                             = '"\u005C - \u000A - \u0009 - \u000D - \u0008 - \u000C - \u002F - \u000B"';
         $this->assertEquals($string, Json\Decoder::decode($encoded));
+        // phpcs:enable
     }
 
     /**
@@ -293,7 +312,7 @@ class JsonTest extends TestCase
      */
     public function testObject()
     {
-        $value = new stdClass();
+        $value      = new stdClass();
         $value->one = 1;
         $value->two = 2;
 
@@ -308,7 +327,7 @@ class JsonTest extends TestCase
      */
     public function testObjectAsObject()
     {
-        $value = new stdClass();
+        $value      = new stdClass();
         $value->one = 1;
         $value->two = 2;
 
@@ -324,7 +343,7 @@ class JsonTest extends TestCase
      */
     public function testDecodeArrayOfObjects()
     {
-        $value = '[{"id":1},{"foo":2}]';
+        $value  = '[{"id":1},{"foo":2}]';
         $expect = [['id' => 1], ['foo' => 2]];
         $this->assertEquals($expect, Json\Decoder::decode($value, Json\Json::TYPE_ARRAY));
     }
@@ -340,12 +359,12 @@ class JsonTest extends TestCase
 
         $expect = [
             'codeDbVar' => [
-                'age'   => ['int', 5],
+                'age'    => ['int', 5],
                 'prenom' => ['varchar', 50],
             ],
-            234 => [22, 'jb'],
-            346 => [64, 'francois'],
-            21  => [12, 'paul']
+            234         => [22, 'jb'],
+            346         => [64, 'francois'],
+            21          => [12, 'paul'],
         ];
 
         $this->assertEquals($expect, Json\Decoder::decode($value, Json\Json::TYPE_ARRAY));
@@ -441,10 +460,10 @@ class JsonTest extends TestCase
      */
     public function testLaminas461()
     {
-        $item1 = new TestAsset\Item();
-        $item2 = new TestAsset\Item();
-        $everything = [];
-        $everything['allItems'] = [$item1, $item2];
+        $item1                     = new TestAsset\Item();
+        $item2                     = new TestAsset\Item();
+        $everything                = [];
+        $everything['allItems']    = [$item1, $item2];
         $everything['currentItem'] = $item1;
 
         // should not fail
@@ -463,16 +482,16 @@ class JsonTest extends TestCase
      */
     public function testLaminas4053()
     {
-        $item1 = new TestAsset\Item();
-        $item2 = new TestAsset\Item();
-        $everything = [];
-        $everything['allItems'] = [$item1, $item2];
+        $item1                     = new TestAsset\Item();
+        $item2                     = new TestAsset\Item();
+        $everything                = [];
+        $everything['allItems']    = [$item1, $item2];
         $everything['currentItem'] = $item1;
 
         $options = ['silenceCyclicalExceptions' => true];
 
         Json\Json::$useBuiltinEncoderDecoder = true;
-        $encoded = Json\Json::encode($everything, true, $options);
+        $encoded                             = Json\Json::encode($everything, true, $options);
 
         // @codingStandardsIgnoreStart
         $json = '{"allItems":[{"__className":"LaminasTest\\\\Json\\\\TestAsset\\\\Item"},{"__className":"LaminasTest\\\\Json\\\\TestAsset\\\\Item"}],"currentItem":"* RECURSION (LaminasTest\\\\Json\\\\TestAsset\\\\Item) *"}';
@@ -483,12 +502,12 @@ class JsonTest extends TestCase
 
     public function testEncodeObject()
     {
-        $actual  = new TestAsset\TestObject();
+        $actual  = new TestObject();
         $encoded = Json\Encoder::encode($actual);
         $decoded = Json\Decoder::decode($encoded, Json\Json::TYPE_OBJECT);
 
         $this->assertTrue(isset($decoded->__className));
-        $this->assertEquals(TestAsset\TestObject::class, $decoded->__className);
+        $this->assertEquals(TestObject::class, $decoded->__className);
         $this->assertTrue(isset($decoded->foo));
         $this->assertEquals('bar', $decoded->foo);
         $this->assertTrue(isset($decoded->bar));
@@ -498,7 +517,7 @@ class JsonTest extends TestCase
 
     public function testEncodeClass()
     {
-        $encoded = Json\Encoder::encodeClass(TestAsset\TestObject::class);
+        $encoded = Json\Encoder::encodeClass(TestObject::class);
 
         $this->assertStringContainsString("Class.create('LaminasTest\\Json\\TestAsset\\TestObject'", $encoded);
         $this->assertStringContainsString("ZAjaxEngine.invokeRemoteMethod(this, 'foo'", $encoded);
@@ -511,7 +530,7 @@ class JsonTest extends TestCase
 
     public function testEncodeClasses()
     {
-        $encoded = Json\Encoder::encodeClasses(['LaminasTest\Json\TestAsset\TestObject', 'Laminas\Json\Json']);
+        $encoded = Json\Encoder::encodeClasses([TestObject::class, \Laminas\Json\Json::class]);
 
         $this->assertStringContainsString("Class.create('LaminasTest\\Json\\TestAsset\\TestObject'", $encoded);
         $this->assertStringContainsString("Class.create('Laminas\\Json\\Json'", $encoded);
@@ -519,9 +538,10 @@ class JsonTest extends TestCase
 
     public function testToJSONSerialization()
     {
+        // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps
         $toJSONObject = new TestAsset\ToJSONClass();
-
-        $result = Json\Json::encode($toJSONObject);
+        $result       = Json\Json::encode($toJSONObject);
+        // phpcs:enable
 
         $this->assertEquals('{"firstName":"John","lastName":"Doe","email":"john@doe.com"}', $result);
     }
@@ -551,9 +571,9 @@ class JsonTest extends TestCase
      */
     public function testEncodingArrayWithExpr()
     {
-        $expr = new Json\Expr('window.alert("Laminas JSON Expr")');
-        $array = ['expr' => $expr, 'int' => 9, 'string' => 'text'];
-        $result = Json\Json::encode($array, false, ['enableJsonExprFinder' => true]);
+        $expr     = new Json\Expr('window.alert("Laminas JSON Expr")');
+        $array    = ['expr' => $expr, 'int' => 9, 'string' => 'text'];
+        $result   = Json\Json::encode($array, false, ['enableJsonExprFinder' => true]);
         $expected = '{"expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
@@ -567,13 +587,13 @@ class JsonTest extends TestCase
     {
         Json\Json::$useBuiltinEncoderDecoder = true;
 
-        $expr = new Json\Expr('window.alert("Laminas JSON Expr")');
-        $obj = new stdClass();
-        $obj->expr = $expr;
-        $obj->int = 9;
+        $expr        = new Json\Expr('window.alert("Laminas JSON Expr")');
+        $obj         = new stdClass();
+        $obj->expr   = $expr;
+        $obj->int    = 9;
         $obj->string = 'text';
-        $result = Json\Json::encode($obj, false, ['enableJsonExprFinder' => true]);
-        $expected = '{"__className":"stdClass","expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
+        $result      = Json\Json::encode($obj, false, ['enableJsonExprFinder' => true]);
+        $expected    = '{"__className":"stdClass","expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
 
@@ -590,13 +610,13 @@ class JsonTest extends TestCase
 
         Json\Json::$useBuiltinEncoderDecoder = false;
 
-        $expr = new Json\Expr('window.alert("Laminas JSON Expr")');
-        $obj = new stdClass();
-        $obj->expr = $expr;
-        $obj->int = 9;
+        $expr        = new Json\Expr('window.alert("Laminas JSON Expr")');
+        $obj         = new stdClass();
+        $obj->expr   = $expr;
+        $obj->int    = 9;
         $obj->string = 'text';
-        $result = Json\Json::encode($obj, false, ['enableJsonExprFinder' => true]);
-        $expected = '{"expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
+        $result      = Json\Json::encode($obj, false, ['enableJsonExprFinder' => true]);
+        $expected    = '{"expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
 
@@ -609,8 +629,8 @@ class JsonTest extends TestCase
     {
         Json\Json::$useBuiltinEncoderDecoder = true;
 
-        $obj = new TestAsset\ToJSONWithExpr();
-        $result = Json\Json::encode($obj, false, ['enableJsonExprFinder' => true]);
+        $obj      = new TestAsset\ToJSONWithExpr();
+        $result   = Json\Json::encode($obj, false, ['enableJsonExprFinder' => true]);
         $expected = '{"expr":window.alert("Laminas JSON Expr"),"int":9,"string":"text"}';
         $this->assertEquals($expected, $result);
     }
@@ -622,7 +642,7 @@ class JsonTest extends TestCase
      */
     public function testEncodingMultipleNestedSwitchingSameNameKeysWithDifferentJSONExprSettings()
     {
-        $data = [
+        $data   = [
             0 => [
                 "alpha" => new Json\Expr("function () {}"),
                 "beta"  => "gamma",
@@ -633,8 +653,8 @@ class JsonTest extends TestCase
             ],
             2 => [
                 "alpha" => "gamma",
-                "beta" => "gamma",
-            ]
+                "beta"  => "gamma",
+            ],
         ];
         $result = Json\Json::encode($data, false, ['enableJsonExprFinder' => true]);
 
@@ -653,9 +673,9 @@ class JsonTest extends TestCase
      */
     public function testEncodingMultipleNestedIteratedSameNameKeysWithDifferentJSONExprSettings()
     {
-        $data = [
+        $data   = [
             0 => [
-                "alpha" => "alpha"
+                "alpha" => "alpha",
             ],
             1 => [
                 "alpha" => "beta",
@@ -668,7 +688,7 @@ class JsonTest extends TestCase
             ],
             4 => [
                 "alpha" => new Json\Expr("epsilon"),
-            ]
+            ],
         ];
         $result = Json\Json::encode($data, false, ['enableJsonExprFinder' => true]);
 
@@ -681,7 +701,7 @@ class JsonTest extends TestCase
     {
         Json\Json::$useBuiltinEncoderDecoder = true;
 
-        $data = [
+        $data   = [
             0 => [
                 "alpha" => new Json\Expr("function () {}"),
                 "beta"  => "gamma",
@@ -700,17 +720,18 @@ class JsonTest extends TestCase
      */
     public function testEncodeWithUtf8IsTransformedToPackedSyntax()
     {
-        $data = ["Отмена"];
+        $data   = ["Отмена"];
         $result = Json\Encoder::encode($data);
 
         $this->assertEquals('["\u041e\u0442\u043c\u0435\u043d\u0430"]', $result);
     }
 
     /**
+     * @link http://solarphp.com
+     *
      * @group Laminas-4054
      *
      * This test contains assertions from the Solar Framework by Paul M. Jones
-     * @link http://solarphp.com
      */
     public function testEncodeWithUtf8IsTransformedSolarRegression()
     {
@@ -760,14 +781,15 @@ class JsonTest extends TestCase
     }
 
     /**
+     * @link http://solarphp.com
+     *
      * @group Laminas-4054
      *
      * This test contains assertions from the Solar Framework by Paul M. Jones
-     * @link http://solarphp.com
      */
     public function testEncodeWithUtf8IsTransformedSolarRegressionEqualsJSONExt()
     {
-        if (function_exists('json_encode') == false) {
+        if (function_exists('json_encode') === false) {
             $this->markTestSkipped('Test can only be run, when ext/json is installed.');
         }
 
@@ -790,7 +812,7 @@ class JsonTest extends TestCase
         $data = ["Отмена" => new Json\Expr("foo")];
 
         Json\Json::$useBuiltinEncoderDecoder = true;
-        $result = Json\Json::encode($data, false, ['enableJsonExprFinder' => true]);
+        $result                              = Json\Json::encode($data, false, ['enableJsonExprFinder' => true]);
         $this->assertEquals('{"\u041e\u0442\u043c\u0435\u043d\u0430":foo}', $result);
         Json\Json::$useBuiltinEncoderDecoder = false;
 
@@ -818,9 +840,9 @@ class JsonTest extends TestCase
     {
         $iterator = new ArrayIterator([
             'foo' => 'bar',
-            'baz' => 5
+            'baz' => 5,
         ]);
-        $target = '{"__className":"ArrayIterator","foo":"bar","baz":5}';
+        $target   = '{"__className":"ArrayIterator","foo":"bar","baz":5}';
 
         Json\Json::$useBuiltinEncoderDecoder = true;
         $this->assertEquals($target, Json\Json::encode($iterator));
@@ -832,7 +854,7 @@ class JsonTest extends TestCase
     public function testEncodeObjectImplementingIteratorAggregate()
     {
         $iterator = new TestAsset\TestIteratorAggregate();
-        $target = '{"__className":"LaminasTest\\\\Json\\\\TestAsset\\\\TestIteratorAggregate","foo":"bar","baz":5}';
+        $target   = '{"__className":"LaminasTest\\\\Json\\\\TestAsset\\\\TestIteratorAggregate","foo":"bar","baz":5}';
 
         Json\Json::$useBuiltinEncoderDecoder = true;
         $this->assertEquals($target, Json\Json::encode($iterator));
@@ -900,8 +922,8 @@ class JsonTest extends TestCase
      */
     public function testIteratorWithoutDefinedKey()
     {
-        $inputValue = new ArrayIterator(['foo']);
-        $encoded = Json\Encoder::encode($inputValue);
+        $inputValue       = new ArrayIterator(['foo']);
+        $encoded          = Json\Encoder::encode($inputValue);
         $expectedDecoding = '{"__className":"ArrayIterator",0:"foo"}';
         $this->assertEquals($expectedDecoding, $encoded);
     }
@@ -921,17 +943,17 @@ class JsonTest extends TestCase
      */
     public function testJsonPrettyPrintWorksWithArrayNotationInStringLiteral()
     {
-        $o = new stdClass();
+        $o       = new stdClass();
         $o->test = 1;
-        $o->faz = 'fubar';
+        $o->faz  = 'fubar';
 
         // The escaped double-quote in item 'stringwithjsonchars' ensures that
         // escaped double-quotes do not throw off string literal detection in
         // prettyPrint
-        $test = [
-            'simple' => 'simple test string',
+        $test     = [
+            'simple'              => 'simple test string',
             'stringwithjsonchars' => '\"[1,2]',
-            'complex' => [
+            'complex'             => [
                 'foo' => 'bar',
                 'far' => 'boo',
                 'faz' => [
@@ -940,7 +962,7 @@ class JsonTest extends TestCase
                 'fay' => ['foo', 'bar'],
             ],
         ];
-        $pretty = Json\Json::prettyPrint(Json\Json::encode($test), ['indent' => ' ']);
+        $pretty   = Json\Json::prettyPrint(Json\Json::encode($test), ['indent' => ' ']);
         $expected = <<<EOB
 {
  "simple": "simple test string",
@@ -1096,23 +1118,23 @@ EOB;
 
         $this->assertSame(
             $expected,
-            Json\Json::prettyPrint($expected, ['indent'  => ' '])
+            Json\Json::prettyPrint($expected, ['indent' => ' '])
         );
     }
 
     public function testEncodeWithPrettyPrint()
     {
-        $o = new stdClass();
+        $o       = new stdClass();
         $o->test = 1;
-        $o->faz = 'fubar';
+        $o->faz  = 'fubar';
 
         // The escaped double-quote in item 'stringwithjsonchars' ensures that
         // escaped double-quotes do not throw off string literal detection in
         // prettyPrint
-        $test = [
-            'simple' => 'simple test string',
+        $test   = [
+            'simple'              => 'simple test string',
             'stringwithjsonchars' => '\"[1,2]',
-            'complex' => [
+            'complex'             => [
                 'foo' => 'bar',
                 'far' => 'boo',
                 'faz' => [
@@ -1146,7 +1168,7 @@ EOB;
      */
     public function testEncodeWillUseToArrayMethodWhenAvailable()
     {
-        $o = new TestAsset\Laminas11167ToArrayClass();
+        $o       = new TestAsset\Laminas11167ToArrayClass();
         $objJson = Json\Json::encode($o);
         $arrJson = Json\Json::encode($o->toArray());
         $this->assertSame($arrJson, $objJson);
@@ -1157,7 +1179,7 @@ EOB;
      */
     public function testEncodeWillUseToJsonWhenBothToJsonAndToArrayMethodsAreAvailable()
     {
-        $o = new TestAsset\Laminas11167ToArrayToJsonClass();
+        $o       = new TestAsset\Laminas11167ToArrayToJsonClass();
         $objJson = Json\Json::encode($o);
         $this->assertEquals('"bogus"', $objJson);
         $arrJson = Json\Json::encode($o->toArray());
@@ -1176,7 +1198,7 @@ EOB;
         // @codingStandardsIgnoreEnd
 
         Json\Json::$useBuiltinEncoderDecoder = true;
-        $json = Json\Encoder::encode($array);
+        $json                                = Json\Encoder::encode($array);
         $this->assertEquals($expected, $json);
     }
 
@@ -1187,7 +1209,7 @@ EOB;
     {
         Json\Json::$useBuiltinEncoderDecoder = true;
 
-        $json = '{"":"test"}';
+        $json   = '{"":"test"}';
         $object = Json\Json::decode($json, Json\Json::TYPE_OBJECT);
         $this->assertTrue(isset($object->_empty_));
         $this->assertEquals('test', $object->_empty_);
