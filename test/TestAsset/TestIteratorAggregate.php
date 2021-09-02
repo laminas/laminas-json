@@ -10,6 +10,7 @@ namespace LaminasTest\Json\TestAsset;
 
 use ArrayIterator;
 use IteratorAggregate;
+use ReturnTypeWillChange;
 
 /**
  * @see Laminas-12347
@@ -21,6 +22,7 @@ class TestIteratorAggregate implements IteratorAggregate
         'baz' => 5,
     ];
 
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->array);

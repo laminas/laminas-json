@@ -9,9 +9,11 @@
 namespace LaminasTest\Json\TestAsset;
 
 use Laminas\Stdlib\JsonSerializable;
+use ReturnTypeWillChange;
 
 class JsonSerializableLaminasImpl implements JsonSerializable
 {
+    #[ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [__FUNCTION__];
