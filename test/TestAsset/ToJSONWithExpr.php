@@ -1,9 +1,4 @@
-<?php // @codingStandardsIgnoreFile
-/**
- * @see       https://github.com/laminas/laminas-json for the canonical source repository
- * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
- */
+<?php
 
 namespace LaminasTest\Json\TestAsset;
 
@@ -15,16 +10,26 @@ use Laminas\Json\Json;
  */
 class ToJSONWithExpr
 {
+    // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCapsProperty,PSR2.Classes.PropertyDeclaration.Underscore
+
+    /** @var string */
     private $_string = 'text';
+
+    /** @var int */
     private $_int = 9;
+
+    /** @var string */
     private $_expr = 'window.alert("Laminas JSON Expr")';
 
+    // phpcs:enable
+
+    /** @return string */
     public function toJSON()
     {
         $data = [
             'expr'   => new Expr($this->_expr),
             'int'    => $this->_int,
-            'string' => $this->_string
+            'string' => $this->_string,
         ];
 
         return Json::encode($data, false, ['enableJsonExprFinder' => true]);

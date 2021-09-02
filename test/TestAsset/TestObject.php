@@ -1,11 +1,5 @@
 <?php
 
-/**
- * @see       https://github.com/laminas/laminas-json for the canonical source repository
- * @copyright https://github.com/laminas/laminas-json/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-json/blob/master/LICENSE.md New BSD License
- */
-
 namespace LaminasTest\Json\TestAsset;
 
 /**
@@ -13,23 +7,39 @@ namespace LaminasTest\Json\TestAsset;
  */
 class TestObject
 {
-    const FOO = 'bar';
+    public const FOO = 'bar';
 
+    /** @var string */
     public $foo = 'bar';
+
+    /** @var string */
     public $bar = 'baz';
 
-    // @codingStandardsIgnoreStart
-    protected $_foo = 'fooled you';
-    // @codingStandardsIgnoreEnd
+    // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCapsProperty,PSR2.Classes.PropertyDeclaration.Underscore
 
+    /** @var string */
+    protected $_foo = 'fooled you';
+
+    // phpcs:enable
+
+    /**
+     * @param mixed $bar
+     * @param mixed $baz
+     * @return void
+     */
     public function foo($bar, $baz)
     {
     }
 
+    /**
+     * @param mixed $baz
+     * @return void
+     */
     public function bar($baz)
     {
     }
 
+    /** @return void */
     protected function baz()
     {
     }
