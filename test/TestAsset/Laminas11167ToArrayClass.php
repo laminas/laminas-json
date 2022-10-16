@@ -10,15 +10,11 @@ namespace LaminasTest\Json\TestAsset;
 class Laminas11167ToArrayClass
 {
     // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCapsProperty,PSR2.Classes.PropertyDeclaration.Underscore
+    private string $_firstName = 'John';
 
-    /** @var string */
-    private $_firstName = 'John';
+    private string $_lastName = 'Doe';
 
-    /** @var string */
-    private $_lastName = 'Doe';
-
-    /** @var string */
-    private $_email = 'john@doe.com';
+    private string $_email = 'john@doe.com';
 
     // phpcs:enable
 

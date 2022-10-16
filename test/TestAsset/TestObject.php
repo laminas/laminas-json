@@ -23,21 +23,17 @@ class TestObject
     protected $_foo = 'fooled you';
 
     // phpcs:enable
-
     /**
-     * @param mixed $bar
-     * @param mixed $baz
      * @return void
      */
-    public function foo($bar, $baz)
+    public function foo(mixed $bar, mixed $baz)
     {
     }
 
     /**
-     * @param mixed $baz
      * @return void
      */
-    public function bar($baz)
+    public function bar(mixed $baz)
     {
     }
 

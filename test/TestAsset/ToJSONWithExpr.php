@@ -13,15 +13,11 @@ use Laminas\Json\Json;
 class ToJSONWithExpr
 {
     // phpcs:disable WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCapsProperty,PSR2.Classes.PropertyDeclaration.Underscore
+    private string $_string = 'text';
 
-    /** @var string */
-    private $_string = 'text';
+    private int $_int = 9;
 
-    /** @var int */
-    private $_int = 9;
-
-    /** @var string */
-    private $_expr = 'window.alert("Laminas JSON Expr")';
+    private string $_expr = 'window.alert("Laminas JSON Expr")';
 
     // phpcs:enable
 
