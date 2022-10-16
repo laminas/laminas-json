@@ -14,7 +14,6 @@ use function bin2hex;
 use function chr;
 use function count;
 use function function_exists;
-use function get_class;
 use function get_class_vars;
 use function get_object_vars;
 use function implode;
@@ -139,11 +138,11 @@ class Encoder
                 ) {
                     throw new RecursionException(sprintf(
                         'Cycles not supported in JSON encoding; cycle introduced by class "%s"',
-                        get_class($value)
+                        $value::class
                     ));
                 }
 
-                return '"* RECURSION (' . str_replace('\\', '\\\\', get_class($value)) . ') *"';
+                return '"* RECURSION (' . str_replace('\\', '\\\\', $value::class) . ') *"';
             }
 
             $this->visited[] = $value;
@@ -174,7 +173,7 @@ class Encoder
             }
         }
 
-        $className = get_class($value);
+        $className = $value::class;
         return '{"__className":'
             . $this->encodeString($className)
             . $props . '}';
