@@ -9,15 +9,11 @@ use Laminas\Json\Json;
 class ToJSONClass
 {
     // phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore,WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCapsProperty
+    private string $_firstName = 'John';
 
-    /** @var string */
-    private $_firstName = 'John';
+    private string $_lastName = 'Doe';
 
-    /** @var string */
-    private $_lastName = 'Doe';
-
-    /** @var string */
-    private $_email = 'john@doe.com';
+    private string $_email = 'john@doe.com';
 
     // phpcs:enable
 

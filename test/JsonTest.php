@@ -28,8 +28,7 @@ use const LC_ALL;
 
 class JsonTest extends TestCase
 {
-    /** @var bool */
-    private $originalUseBuiltinEncoderDecoderValue;
+    private bool $originalUseBuiltinEncoderDecoderValue;
 
     public function setUp(): void
     {
@@ -49,9 +48,9 @@ class JsonTest extends TestCase
      */
     public function assertEncodesToDecodable($values, $message = null): void
     {
-        $message = $message ?: 'One or more values could not be decoded after encoding';
-        $values  = $values ?? [null];
-        $values  = is_scalar($values) ? [$values] : $values;
+        $message  = $message ?: 'One or more values could not be decoded after encoding';
+        $values ??= [null];
+        $values   = is_scalar($values) ? [$values] : $values;
 
         foreach ($values as $value) {
             $encoded = Json\Encoder::encode($value);
@@ -377,10 +376,9 @@ class JsonTest extends TestCase
      *
      * Casts objects to arrays for expectation comparisons.
      *
-     * @param mixed $value
      * @return mixed
      */
-    protected function toArray($value)
+    protected function toArray(mixed $value)
     {
         if (! is_array($value) || ! is_object($value)) {
             return $value;

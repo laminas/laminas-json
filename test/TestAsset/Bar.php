@@ -8,13 +8,8 @@ use Exception;
 
 class Bar
 {
-    /** @var mixed */
-    protected $val;
-
-    /** @param mixed $someval */
-    public function __construct($someval)
+    public function __construct(protected mixed $val)
     {
-        $this->val = $someval;
     }
 
     /**
@@ -22,10 +17,9 @@ class Bar
      *
      * @param  bool $one
      * @param  string $two
-     * @param  mixed $three
      * @return array
      */
-    public function foo($one, $two = 'two', $three = null)
+    public function foo($one, $two = 'two', mixed $three = null)
     {
         return [$one, $two, $three, $this->val];
     }
